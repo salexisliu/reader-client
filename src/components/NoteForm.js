@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 
-function NoteForm({open, handleClose}) {
+function NoteForm({ open, handleClose }) {
   <Dialog open={open} onClose={handleClose}>
     <DialogTitle>Subscribe</DialogTitle>
     <DialogContent>
@@ -32,13 +32,9 @@ function NoteForm({open, handleClose}) {
       <Button onClick={handleClose}>Cancel</Button>
       <Button onClick={handleClose}>Subscribe</Button>
     </DialogActions>
-  </Dialog>
-  
-  return (
-    <>
-      
-    </>
-  );
+  </Dialog>;
+
+  return <></>;
 }
 
 export default NoteForm;

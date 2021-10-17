@@ -2,19 +2,28 @@ import React, { useState, useEffect } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
-import NoteForm from "./NoteForm.js";
+import NoteIndex from "./NoteIndex.js";
 import TextField from "@mui/material/TextField";
-function StoryLines({ lineObj, highlightLine, showToolbar, toolbar }) {
+
+function StoryLines({
+  lineObj,
+  highlightLine,
+  toolbar,
+  notes,
+  setNotes,
+  addNote,
+}) {
   const [isHighlighted, setIsHighlighted] = useState(false);
   const [hasNote, setNote] = useState(false);
-  const [note, setShowNote] = useState(false);
+  const [showNote, setShowNote] = useState(false);
   const [open, setOpen] = useState(false);
+  const [input, setInput] = useState("");
+
   console.log("open", open);
   const handleClickOpen = () => {
     setOpen(!open);
@@ -22,6 +31,28 @@ function StoryLines({ lineObj, highlightLine, showToolbar, toolbar }) {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleAddNote = () => {
+    setOpen(false);
+    addNote({
+      line_id: lineObj.id,
+      content: input,
+    });
+    setNote(true);
+  };
+
+  const deleteNote = (id) => {
+    setNote(false);
+
+    fetch(`notes/${id}`, {
+      method: "DELETE",
+    }).then((res) => {
+      if (res.ok) {
+        const updatedNotes = notes.filter((note) => note.id !== id);
+        setNotes(updatedNotes);
+      }
+    });
   };
 
   const checkIfHighlighted = () => {
@@ -33,16 +64,15 @@ function StoryLines({ lineObj, highlightLine, showToolbar, toolbar }) {
   };
 
   const checkNote = () => {
-    if (lineObj.note) {
-      console.log(lineObj.note.content);
-      setNote(true);
+    if (lineObj.notes.length === 0) {
+      console.log(lineObj.notes);
     } else {
-      console.log("no");
+      setNote(true);
     }
   };
 
-  const showNote = () => {
-    setShowNote(!note);
+  const toggleNote = () => {
+    setShowNote(!showNote);
   };
 
   useEffect(() => {
@@ -60,6 +90,12 @@ function StoryLines({ lineObj, highlightLine, showToolbar, toolbar }) {
     highlightLine({ id: lineObj.id, highlighted: !isHighlighted });
   };
 
+  const handleChangeInput = (event) => {
+    const values = event.target.value;
+    setInput(values);
+  };
+
+  console.log("input", input);
   return (
     <>
       {toolbar ? (
@@ -85,11 +121,13 @@ function StoryLines({ lineObj, highlightLine, showToolbar, toolbar }) {
               multiline
               rows={4}
               defaultValue="write something"
+              value={input}
+              onChange={(event) => handleChangeInput(event)}
             />
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleClose}>Add</Button>
+            <Button onClick={handleAddNote}>Add</Button>
           </DialogActions>
         </Dialog>
       ) : (
@@ -105,8 +143,16 @@ function StoryLines({ lineObj, highlightLine, showToolbar, toolbar }) {
           {lineObj.id} {lineObj.content}
         </h3>
       )}
-      {hasNote ? <Button onClick={showNote}>see note</Button> : <></>}
-      {note ? <h5 style={{ color: "red" }}>{lineObj.note.content}</h5> : <></>}
+      {hasNote ? <Button onClick={toggleNote}>see note</Button> : <></>}
+      {showNote ? (
+        <h5 style={{ color: "red" }}>
+          {lineObj.notes.map((note) => (
+            <NoteIndex deleteNote={deleteNote} note={note} />
+          ))}
+        </h5>
+      ) : (
+        <></>
+      )}
     </>
   );
 }

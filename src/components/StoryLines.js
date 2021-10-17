@@ -10,14 +10,10 @@ import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import NoteIndex from "./NoteIndex.js";
 import TextField from "@mui/material/TextField";
 
-function StoryLines({
-  lineObj,
-  highlightLine,
-  toolbar,
-  notes,
-  setNotes,
-  addNote,
-}) {
+function StoryLines({ lineObj, highlightLine, notes, addNote, showToolbar, setNotes, toolbar}) {
+  console.log(lineObj)
+
+
   const [isHighlighted, setIsHighlighted] = useState(false);
   const [hasNote, setNote] = useState(false);
   const [showNote, setShowNote] = useState(false);
@@ -65,7 +61,7 @@ function StoryLines({
 
   const checkNote = () => {
     if (lineObj.notes.length === 0) {
-      console.log(lineObj.notes);
+      console.log("NOTES", lineObj.notes);
     } else {
       setNote(true);
     }
@@ -82,7 +78,7 @@ function StoryLines({
 
   function highlight() {
     setIsHighlighted((isHighlighted) => !isHighlighted);
-    // showToolbar();
+    showToolbar();
   }
 
   const handleClick = () => {
@@ -97,6 +93,7 @@ function StoryLines({
 
   console.log("input", input);
   return (
+  
     <>
       {toolbar ? (
         <>
@@ -133,18 +130,17 @@ function StoryLines({
       ) : (
         <></>
       )}
-
+<>
       {isHighlighted ? (
-        <h3 style={{ color: "violet" }}>
-          {lineObj.id} {lineObj.content}
-        </h3>
+        <h3 style={{ color: "violet" }}>{lineObj.id} {lineObj.content} </h3>
       ) : (
         <h3>
           {lineObj.id} {lineObj.content}
         </h3>
       )}
-      {hasNote ? <Button onClick={toggleNote}>see note</Button> : <></>}
-      {showNote ? (
+      </>
+     {hasNote ? <Button onClick={toggleNote}>see note</Button> : <></>}
+    {showNote ? (
         <h5 style={{ color: "red" }}>
           {lineObj.notes.map((note) => (
             <NoteIndex deleteNote={deleteNote} note={note} />

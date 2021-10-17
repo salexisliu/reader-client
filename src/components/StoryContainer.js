@@ -13,27 +13,33 @@ function StoryContainer() {
   const [toolbar, setToolbar] = useState(false);
   const [lines, setLines] = useState([]);
   const [notes, setNotes] = useState([]);
-  const [book, setBook] = useState({});
+  const [book, setBook] = useState({lines:{}});
 
   useEffect(() => {
     fetchBook();
-  }, []);
+  }, [notes]);
 
   const fetchBook = () => {
     fetch(`/books/${2}`)
       .then((res) => res.json())
-      .then((data) => setBook(data));
+      .then((data) => setBookandLines(data))
   };
 
-  useEffect(() => {
-    fetchLines();
-  }, [notes]);
+  const setBookandLines = (data) => {
+    setBook(data)
+    setLines(data.lines)
+  }
 
-  const fetchLines = () => {
-    fetch("/lines")
-      .then((res) => res.json())
-      .then((data) => setLines(data));
-  };
+
+  // useEffect(() => {
+  //   fetchLines();
+  // }, [notes]);
+
+  // const fetchLines = () => {
+  //   fetch("/lines")
+  //     .then((res) => res.json())
+  //     .then((data) => console.log(data));
+  // };
 
   const highlightLine = (formData) => {
     console.log("formData", formData);
@@ -105,7 +111,7 @@ function StoryContainer() {
         <h2 style={{ padding: "10px" }}>{book.title}</h2>
 
         {lines
-          .sort((a, b) => (a.id > b.id ? 1 : -1))
+        .sort((a, b) => (a.id > b.id ? 1 : -1))
           .map((line) => (
             <>
               <div style={{ display: "inline-flex" }}>
@@ -121,6 +127,7 @@ function StoryContainer() {
               </div>
             </>
           ))}
+    
       </Container>
     </>
   );

@@ -1,5 +1,29 @@
 .App {
-  text-align: center;
+  background-color: rgba(255,255,255, 0.95);
+  width: 100%;
+  margin: 0em auto;
+  min-height: 100h;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  background: rgb(75, 96, 97);
+}
+
+.navlink {
+  display: flex;
+  justify-content: flex-start;
+   justify-content: space-between;
+  align-items: center;
+  color:rgba(255,255,255, 0.95);
+ padding-left:30px;
+  padding-right:30px;
 }
 
 .App-logo {

@@ -4,10 +4,11 @@ import Container from "@mui/material/Container";
 import StoryLines from "./StoryLines.js"
 import IconButton from "@mui/material/IconButton";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import Button from "@mui/material/Button";
 
 function StoryContainer() {
-
+  const [toolbar, setToolbar] = useState(false)
   const [lines, setLines] = useState([]);
 
   useEffect(() => {
@@ -51,12 +52,17 @@ function StoryContainer() {
   //     setLines(newLines)
 
   //   }
-  
+
+  const showToolbar = () => {
+    setToolbar(!toolbar)
+  }
 
 
   return (<>
    
     <Container>
+      <Button onClick={showToolbar}> Show Toolbar</Button>
+
       <h2 style={{ padding: "10px" }} >Story</h2>
       
         {
@@ -65,9 +71,7 @@ function StoryContainer() {
 
           <>
             <div style={{ display: 'inline-flex' }}>
-              <IconButton ><BorderColorIcon /></IconButton> 
-              <IconButton ><BorderColorIcon /></IconButton>
-              <StoryLines lineObj={line} highlightLine={highlightLine}/>
+              <StoryLines lineObj={line} highlightLine={highlightLine} showToolbar={showToolbar} toolbar={toolbar}/>
 </div>
           </>
         ))}

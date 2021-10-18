@@ -44,6 +44,7 @@ function NavBar() {
            
           <ListItem >  <ListItemIcon><MailIcon /></ListItemIcon> <NavLink className="navlink" to="/read">Story  </NavLink></ListItem>
 
+          <ListItem >  <ListItemIcon><MailIcon /></ListItemIcon> <NavLink className="navlink" to="/upload">Import Book  </NavLink></ListItem>
      
         </List>
         <Divider />

@@ -132,7 +132,7 @@ function StoryLines({ lineObj, highlightLine, notes, addNote, showToolbar, setNo
       )}
 <>
       {isHighlighted ? (
-        <h3 style={{ color: "violet" }}>{lineObj.id} {lineObj.content} </h3>
+        <h3 style={{ color: "orange" }}>{lineObj.id} {lineObj.content} </h3>
       ) : (
         <h3>
           {lineObj.id} {lineObj.content}

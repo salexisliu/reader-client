@@ -4,13 +4,7 @@ import AuthenticatedApp from "./AuthenticatedApp.js";
 
 
 function App() {
-  const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    fetch("/lines")
-      .then((r) => r.json())
-      .then((data) => setCount(data.count));
-  }, []);
 
   return (
     <Router>

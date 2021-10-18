@@ -5,19 +5,19 @@ import BookContainer from "./components/BookContainer"
 import BookForm from "./components/BookForm"
 import NavBar from "./NavBar"
 import Box from '@mui/material/Box';
+
 function AuthenticatedApp() {
 
   return (
     <BrowserRouter>
       <div className="App">
-           <Box sx={{ display: 'flex' }}>
+        <Box sx={{ p: 2, m: 2, display: 'flex' }}>
 
         <nav>
           <span>
             <NavBar />
           </span>
         </nav>
-
 
         <Switch>
           <Route path="/read">
@@ -36,6 +36,7 @@ function AuthenticatedApp() {
             <h1>Homepage</h1>
           </Route>
         </Switch>
+
         </Box>
       </div>
   

@@ -10,53 +10,80 @@ import { ConstructionOutlined } from "@mui/icons-material";
 
 function BookForm({}) {
   const [bookText, setBookText] = useState("");
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
   const [formErrors, setFormErrors] = useState([]);
- 
+  const [linesAttributes, setLinesAttributes] = useState([])
+
+  // {
+  //   "title": "Alice in Wonderland2",
+  //     "summary": "a short story",
+  //       "author": "Lewis Carroll",
+  //         "user_id": 5,
+  //           "lines_attributes": [
+  //             {
+  //               "content": "Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it, “and what is the use of a book,” thought Alice “without pictures or conversations?"
+  //             },
+  //             {
+  //               "content": "So she was considering in her own mind (as well as she could, for the hot day made her feel very sleepy and stupid), whether the pleasure of making a daisy-chain would be worth the trouble of getting up and picking the daisies, when suddenly a White Rabbit with pink eyes ran close by her."
+  //             },
+  //           }
 
   const handleSubmitText = (e) => {
     setFormErrors([]);
-    // setBookText("")
     e.preventDefault();
-
-    console.log("input", bookText);
+    console.log("TITLE", title, "AUTHOR", author)
+  
+    console.log("FULL TEXT", bookText);
 
     const splitText = bookText.split(/\n/);
     const result = splitText.filter((n) => n !== "");
 
-    result.map((p) =>
-      createLine({
-        content: p,
-        book_id: 7,
-      })
-    );
-  };
+    console.log("RESULT OF SPLIT", result);
 
+    const obj = result.map(sentence => createSentenceObj(sentence))
 
-  const createLine = (formData) => {
-    fetch("/lines", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
+    console.log("LINES ATTRIBUTES,", obj)
+
+    createBook({
+      title: title,
+      author: author,
+      user_id: 5,
+      lines_attributes: obj
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          //  return res.json().then((err) => setFormErrors(err));
-          return res
-            .json()
-            .then((errors) => setFormErrors(errors.title))
-            .then((errors) => Promise.reject(errors));
-        }
+
+   }
+
+  function createSentenceObj(sentence) {
+    return {
+      content: sentence
+    }
+  }
+
+  const createBook = (formData) => {
+    console.log("FORMDATA", formData)
+      fetch("/books", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       })
+      .then((r) => (r.json()))
       .then((text) => {
-        console.log(text);
+        console.log("fnished", text);
+
         //  setBookText(bookText.concat(text))
       });
   };
 
+     // for (let i = 0; i < result.length; i++) {
+    //     createBook({
+    //       content: result[i],
+    //       book_id: 7,
+    //       position: i,
+    //     })
+    // }
   return (
     <>
       <Container>
@@ -67,24 +94,27 @@ function BookForm({}) {
           }}
         >
           <h1>Form</h1>
-
+          <form onSubmit={handleSubmitText}>
+            <>
           <TextField
             helperText="Please enter title"
             margin="normal"
             id="outlined-basic"
-            label="Outlined"
+            label="Title"
             variant="outlined"
+            onChange={(e) => setTitle(e.target.value)}
           />
 
           <TextField
             margin="normal"
             helperText="Enter author"
             id="outlined-basic"
-            label="Outlined"
+            label="Author"
             variant="outlined"
+            onChange={(e) => setAuthor(e.target.value)}
           />
 
-          <form onSubmit={handleSubmitText}>
+          
             <TextField
               fullWidth
               id="outlined-textarea"
@@ -103,11 +133,13 @@ function BookForm({}) {
             >
               Submit
             </Button>
+            </>
           </form>
         </Box>
       </Container>
     </>
   );
+
 }
 
 export default BookForm;

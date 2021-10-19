@@ -40,11 +40,11 @@ function NavBar() {
      
           <ListItem >   <ListItemIcon><MailIcon/></ListItemIcon><NavLink className="navlink" to="/home">Home</NavLink>  </ListItem>
      
-          <ListItem >  <ListItemIcon><MailIcon /></ListItemIcon> <NavLink className="navlink" to="/books">Books  </NavLink> </ListItem>
+          <ListItem >  <ListItemIcon><MailIcon /></ListItemIcon> <NavLink className="navlink" to="/books">Texts </NavLink> </ListItem>
            
-          <ListItem >  <ListItemIcon><MailIcon /></ListItemIcon> <NavLink className="navlink" to="/read">Story  </NavLink></ListItem>
+          {/* <ListItem >  <ListItemIcon><MailIcon /></ListItemIcon> <NavLink className="navlink" to="/read">Story  </NavLink></ListItem> */}
 
-          <ListItem >  <ListItemIcon><MailIcon /></ListItemIcon> <NavLink className="navlink" to="/upload">Import Book  </NavLink></ListItem>
+          <ListItem >  <ListItemIcon><MailIcon /></ListItemIcon> <NavLink className="navlink" to="/upload">Import Texts </NavLink></ListItem>
      
         </List>
         <Divider />

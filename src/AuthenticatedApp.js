@@ -6,7 +6,11 @@ import BookForm from "./components/BookForm"
 import NavBar from "./NavBar"
 import Box from '@mui/material/Box';
 
+
+
 function AuthenticatedApp() {
+
+
 
   return (
     <BrowserRouter>
@@ -20,7 +24,7 @@ function AuthenticatedApp() {
         </nav>
 
         <Switch>
-          <Route path="/read">
+          <Route exact path="/read">
             <StoryContainer />
           </Route>
 
@@ -31,6 +35,9 @@ function AuthenticatedApp() {
             <Route path="/upload">
              <BookForm/>
             </Route>
+
+            <Route exact path="/read/:id"
+              render={({ match }) => { return <StoryContainer bookId={match.params.id} /> }} />
 
           <Route path="/">
             <h1>Homepage</h1>

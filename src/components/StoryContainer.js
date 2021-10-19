@@ -7,29 +7,35 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import Button from "@mui/material/Button";
 import { useHistory } from "react-router-dom";
+import { useParams } from 'react-router-dom'
 
-function StoryContainer() {
+function StoryContainer({ bookId }) {
+
+  console.log("USEPARAMS", bookId)
+
+  console.log(bookId)
   const history = useHistory();
   const [toolbar, setToolbar] = useState(false);
   const [lines, setLines] = useState([]);
+  const [book, setBook] = useState({ lines: {} });
   const [notes, setNotes] = useState([]);
-  const [book, setBook] = useState({lines:{}});
+
+  console.log("bookId", bookId)
 
   useEffect(() => {
     fetchBook();
   }, [notes]);
 
   const fetchBook = () => {
-    fetch(`/books/${2}`)
+    fetch(`/books/${bookId}`)
       .then((res) => res.json())
-      .then((data) => setBookandLines(data))
+      .then((data) => setBookandLines(data));
   };
 
   const setBookandLines = (data) => {
-    setBook(data)
-    setLines(data.lines)
-  }
-
+    setBook(data);
+    setLines(data.lines);
+  };
 
   // useEffect(() => {
   //   fetchLines();
@@ -111,7 +117,7 @@ function StoryContainer() {
         <h2 style={{ padding: "10px" }}>{book.title}</h2>
 
         {lines
-        .sort((a, b) => (a.id > b.id ? 1 : -1))
+          .sort((a, b) => (a.id > b.id ? 1 : -1))
           .map((line) => (
             <>
               <div style={{ display: "inline-flex" }}>
@@ -127,7 +133,6 @@ function StoryContainer() {
               </div>
             </>
           ))}
-    
       </Container>
     </>
   );

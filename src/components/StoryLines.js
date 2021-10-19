@@ -10,9 +10,16 @@ import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import NoteIndex from "./NoteIndex.js";
 import TextField from "@mui/material/TextField";
 
-function StoryLines({ lineObj, highlightLine, notes, addNote, showToolbar, setNotes, toolbar}) {
-  console.log(lineObj)
-
+function StoryLines({
+  lineObj,
+  highlightLine,
+  notes,
+  addNote,
+  showToolbar,
+  setNotes,
+  toolbar,
+}) {
+  console.log(lineObj);
 
   const [isHighlighted, setIsHighlighted] = useState(false);
   const [hasNote, setNote] = useState(false);
@@ -93,7 +100,6 @@ function StoryLines({ lineObj, highlightLine, notes, addNote, showToolbar, setNo
 
   console.log("input", input);
   return (
-  
     <>
       {toolbar ? (
         <>
@@ -130,17 +136,15 @@ function StoryLines({ lineObj, highlightLine, notes, addNote, showToolbar, setNo
       ) : (
         <></>
       )}
-<>
-      {isHighlighted ? (
-        <h3 style={{ color: "orange" }}>{lineObj.id} {lineObj.content} </h3>
-      ) : (
-        <h3>
-          {lineObj.id} {lineObj.content}
-        </h3>
-      )}
+      <>
+        {isHighlighted ? (
+          <h4 style={{ color: "orange" }}>{lineObj.content} </h4>
+        ) : (
+          <h4>{lineObj.content}</h4>
+        )}
       </>
-     {hasNote ? <Button onClick={toggleNote}>see note</Button> : <></>}
-    {showNote ? (
+      {hasNote ? <Button onClick={toggleNote}>see note</Button> : <></>}
+      {showNote ? (
         <h5 style={{ color: "red" }}>
           {lineObj.notes.map((note) => (
             <NoteIndex deleteNote={deleteNote} note={note} />

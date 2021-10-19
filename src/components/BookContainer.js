@@ -50,7 +50,8 @@ function BookContainer() {
               if (searchQuery == "") {
                 return book;
               } else if (
-                book.title.toLowerCase().includes(searchQuery.toLowerCase())
+                book.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                book.author.toLowerCase().includes(searchQuery.toLowerCase())   
               ) {
                 return book;
               }

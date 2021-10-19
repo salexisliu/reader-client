@@ -35,7 +35,7 @@ function BookCard({book, deleteBook}) {
               {book.title}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {book.summary}
+              {book.author}
             </Typography>
           </CardContent>
         </CardActionArea>

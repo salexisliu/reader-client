@@ -65,7 +65,9 @@ function BookForm({}) {
       fetch("/books", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.token}`,
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
         },
         body: JSON.stringify(formData),
       })

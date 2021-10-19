@@ -45,11 +45,19 @@ function StoryLines({
     setNote(true);
   };
 
+
+
   const deleteNote = (id) => {
     setNote(false);
 
     fetch(`notes/${id}`, {
       method: "DELETE",
+      headers:
+      {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+        Accept: 'application/json',
+      },
     }).then((res) => {
       if (res.ok) {
         const updatedNotes = notes.filter((note) => note.id !== id);
@@ -85,7 +93,7 @@ function StoryLines({
 
   function highlight() {
     setIsHighlighted((isHighlighted) => !isHighlighted);
-    showToolbar();
+    // showToolbar(); //toggles toolbar
   }
 
   const handleClick = () => {

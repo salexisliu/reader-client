@@ -15,7 +15,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
 const drawerWidth = 240;
-function NavBar() {
+function NavBar({logOut}) {
   return (
 <>
 
@@ -45,7 +45,7 @@ function NavBar() {
           {/* <ListItem >  <ListItemIcon><MailIcon /></ListItemIcon> <NavLink className="navlink" to="/read">Story  </NavLink></ListItem> */}
 
           <ListItem >  <ListItemIcon><MailIcon /></ListItemIcon> <NavLink className="navlink" to="/upload">Import Texts </NavLink></ListItem>
-     
+          
         </List>
         <Divider />
         {/* <List>

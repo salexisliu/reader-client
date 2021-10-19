@@ -27,7 +27,14 @@ function StoryContainer({ bookId }) {
   }, [notes]);
 
   const fetchBook = () => {
-    fetch(`/books/${bookId}`)
+    fetch(`/books/${bookId}`, {
+
+        headers: {
+          Authorization: `Bearer ${localStorage.token}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+      },
+    })
       .then((res) => res.json())
       .then((data) => setBookandLines(data));
   };
@@ -53,6 +60,8 @@ function StoryContainer({ bookId }) {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+        Accept: 'application/json',
       },
       body: JSON.stringify(formData),
     })
@@ -78,6 +87,8 @@ function StoryContainer({ bookId }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+        Accept: 'application/json',
       },
       body: JSON.stringify(formData),
     })

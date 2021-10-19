@@ -7,7 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import BookCard from "./BookCard.js";
 import BookContainerSearch from "./BookContainerSearch.js";
 
-function BookContainer() {
+function BookContainer(loggedIn) {
   const [books, setBooks] = useState([]);
   const [searchQuery, setSearchQuery] = useState([]);
   useEffect(() => {
@@ -15,7 +15,13 @@ function BookContainer() {
   }, []);
 
   const fetchBooks = () => {
-    fetch("/books")
+    fetch("/books", {
+      headers: {
+        Authorization: `Bearer ${localStorage.token}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
       .then((res) => res.json())
       .then((books) => setBooks(books));
   };
@@ -23,6 +29,12 @@ function BookContainer() {
   const deleteBook = (id) => {
     fetch(`books/${id}`, {
       method: "DELETE",
+      headers: 
+      {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+        Accept: 'application/json',
+      },
     }).then((res) => {
       if (res.ok) {
         const updatedBooks = books.filter((book) => book.id !== id);
@@ -50,8 +62,8 @@ function BookContainer() {
               if (searchQuery == "") {
                 return book;
               } else if (
-                book.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                book.author.toLowerCase().includes(searchQuery.toLowerCase())   
+                book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                book.author.toLowerCase().includes(searchQuery.toLowerCase())
               ) {
                 return book;
               }

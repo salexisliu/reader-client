@@ -48,7 +48,6 @@ function BookForm({}) {
     createBook({
       title: title,
       author: author,
-      user_id: 5,
       lines_attributes: obj
     })
 

@@ -48,9 +48,8 @@ function StoryLines({
 
 
   const deleteNote = (id) => {
-    setNote(false);
 
-    fetch(`notes/${id}`, {
+    fetch(`http://localhost:4000/notes/${id}`, {
       method: "DELETE",
       headers:
       {
@@ -62,6 +61,7 @@ function StoryLines({
       if (res.ok) {
         const updatedNotes = notes.filter((note) => note.id !== id);
         setNotes(updatedNotes);
+        setNote(false);
       }
     });
   };
@@ -123,6 +123,7 @@ function StoryLines({
       )}
 
       {open ? (
+        //note modal
         <Dialog open={open} onClose={handleClose}>
           <DialogContent>
             <DialogTitle>Add a note</DialogTitle>

@@ -44,15 +44,7 @@ function StoryContainer({ bookId }) {
     setLines(data.lines);
   };
 
-  // useEffect(() => {
-  //   fetchLines();
-  // }, [notes]);
 
-  // const fetchLines = () => {
-  //   fetch("/lines")
-  //     .then((res) => res.json())
-  //     .then((data) => console.log(data));
-  // };
 
   const highlightLine = (formData) => {
     console.log("formData", formData);

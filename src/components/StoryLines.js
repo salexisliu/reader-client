@@ -11,6 +11,8 @@ import NoteIndex from "./NoteIndex.js";
 import TextField from "@mui/material/TextField";
 
 function StoryLines({
+  setNoteChanged,
+  noteChanged,
   lineObj,
   highlightLine,
   notes,
@@ -18,14 +20,13 @@ function StoryLines({
   showToolbar,
   setNotes,
   toolbar,
+  deleteNote
 }) {
   const [hasNote, setNote] = useState(false);
   const [isHighlighted, setIsHighlighted] = useState(false);
   const [showNote, setShowNote] = useState(false);
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
-
-
 
   const handleClickOpen = () => {
     setOpen(!open);
@@ -37,46 +38,24 @@ function StoryLines({
 
   const handleAddNote = () => {
     setOpen(false);
+    setNoteChanged(false);
     addNote({
       line_id: lineObj.id,
       content: input,
     });
     setNote(true);
   };
-
-
-
-  const deleteNote = (id) => {
-
-    fetch(`http://localhost:4000/notes/${id}`, {
-      method: "DELETE",
-      headers:
-      {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.token}`,
-        Accept: 'application/json',
-      },
-    }).then((res) => {
-      if (res.ok) {
-        const updatedNotes = notes.filter((note) => note.id !== id);
-        setNotes(updatedNotes);
-        setNote(false);
-      }
-    });
-  };
-
   const checkIfHighlighted = () => {
     if (lineObj.highlighted == true) {
       setIsHighlighted(true);
     } else {
-      console.log("no");
     }
   };
 
   const checkNote = () => {
     if (lineObj.notes.length === 0) {
     } else {
-      setNote(true);
+      setNote(!hasNote);
     }
   };
 
@@ -85,7 +64,7 @@ function StoryLines({
   };
 
   useEffect(() => {
-    console.log("lineObj", lineObj)
+    // console.log("lineObj", lineObj)
     checkIfHighlighted();
     checkNote();
   }, []);
@@ -105,7 +84,7 @@ function StoryLines({
     setInput(values);
   };
 
-  console.log("input", input);
+  // console.log("input", input);
   return (
     <>
       {toolbar ? (
@@ -146,13 +125,30 @@ function StoryLines({
       )}
       <>
         {isHighlighted ? (
-          <h4 style={{ color: "orange" }} key={ lineObj.id }>{lineObj.content} </h4>
+          <h4 style={{ color: "orange" }} key={lineObj.id}>
+            {lineObj.id}
+            {lineObj.content}
+          </h4>
         ) : (
-          <h4>{lineObj.content}</h4>
+          <h4>
+            {lineObj.id}
+            {lineObj.content}
+          </h4>
         )}
       </>
       {hasNote ? <Button onClick={toggleNote}>see note</Button> : <></>}
+
       {showNote ? (
+        <h5 style={{ color: "red" }}>
+          {lineObj.notes.map((note) => (
+            <NoteIndex deleteNote={deleteNote} note={note} />
+          ))}
+        </h5>
+      ) : (
+        <></>
+      )}
+
+      {noteChanged ? (
         <h5 style={{ color: "red" }}>
           {lineObj.notes.map((note) => (
             <NoteIndex deleteNote={deleteNote} note={note} />

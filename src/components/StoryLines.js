@@ -19,15 +19,14 @@ function StoryLines({
   setNotes,
   toolbar,
 }) {
-  console.log(lineObj);
-
-  const [isHighlighted, setIsHighlighted] = useState(false);
   const [hasNote, setNote] = useState(false);
+  const [isHighlighted, setIsHighlighted] = useState(false);
   const [showNote, setShowNote] = useState(false);
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
 
-  console.log("open", open);
+
+
   const handleClickOpen = () => {
     setOpen(!open);
   };
@@ -76,7 +75,6 @@ function StoryLines({
 
   const checkNote = () => {
     if (lineObj.notes.length === 0) {
-      console.log("NOTES", lineObj.notes);
     } else {
       setNote(true);
     }
@@ -87,6 +85,7 @@ function StoryLines({
   };
 
   useEffect(() => {
+    console.log("lineObj", lineObj)
     checkIfHighlighted();
     checkNote();
   }, []);
@@ -147,7 +146,7 @@ function StoryLines({
       )}
       <>
         {isHighlighted ? (
-          <h4 style={{ color: "orange" }}>{lineObj.content} </h4>
+          <h4 style={{ color: "orange" }} key={ lineObj.id }>{lineObj.content} </h4>
         ) : (
           <h4>{lineObj.content}</h4>
         )}

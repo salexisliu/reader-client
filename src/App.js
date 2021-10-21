@@ -1,25 +1,11 @@
 import { useState, useEffect } from "react";
 
 import AuthenticatedApp from "./AuthenticatedApp.js";
-import SignUp from "./SignUp";
-import Login from "./Login";
 import UnAuthenticatedApp from "./UnAuthenticatedApp.js";
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
 } from "react-router-dom";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 
-import AuthDemo from "./AuthDemo";
 
 export default function App() {
   const [user, setUser] = useState({});
@@ -34,6 +20,7 @@ export default function App() {
     setUser({});
     setLoggedIn(false);
     localStorage.token = "";
+    
   }
 
   useEffect(() => {

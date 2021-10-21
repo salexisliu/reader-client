@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { Redirect, useHistory, Link } from "react-router-dom";
 
+
 function Login({ setUser, loggedIn, setLoggedIn }) {
   const [formErrors, setFormErrors] = useState([]);
   const [username, setUsername] = useState([]);
@@ -34,19 +35,21 @@ function Login({ setUser, loggedIn, setLoggedIn }) {
       });
   }
 
+
   return (
     <>
+     
       <Container>
         {loggedIn ? (
           <Redirect to="/" />
-        ) : (
-          <Box
-            sx={{
-              m: 1,
-              width: "70ch",
-            }}
-          >
+        ) : (<>
+            <Box sx={{
+              p: 2, m: 2, display: "flex", flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
             <h1>Form</h1>
+
             <form onSubmit={handleLogin}>
               <TextField
                 helperText="Please enter username"
@@ -76,10 +79,12 @@ function Login({ setUser, loggedIn, setLoggedIn }) {
               </Button>
                 <Link to="/signup"><Button>Sign up</Button></Link>
             </form>
-          </Box>
+</Box>
+</>
         )}
       </Container>
-    </>
+</>
+
   );
 }
 

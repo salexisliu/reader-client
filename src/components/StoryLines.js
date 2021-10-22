@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -20,7 +20,9 @@ function StoryLines({
   showToolbar,
   setNotes,
   toolbar,
-  deleteNote
+  deleteNote,
+  addLookUp,
+  getSelectionText
 }) {
   const [hasNote, setNote] = useState(false);
   const [isHighlighted, setIsHighlighted] = useState(false);
@@ -84,6 +86,11 @@ function StoryLines({
     setInput(values);
   };
 
+   
+  
+
+  
+
   // console.log("input", input);
   return (
     <>
@@ -125,12 +132,12 @@ function StoryLines({
       )}
       <>
         {isHighlighted ? (
-          <h4 style={{ color: "orange" }} key={lineObj.id}>
+          <h4 onMouseUp={getSelectionText} style={{ color: "orange" }} key={lineObj.id}>
             {lineObj.id}
             {lineObj.content}
           </h4>
         ) : (
-          <h4>
+            <h4 onMouseUp={getSelectionText}  >
             {lineObj.id}
             {lineObj.content}
           </h4>

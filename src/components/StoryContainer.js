@@ -5,17 +5,21 @@ import Container from "@mui/material/Container";
 import StoryLines from "./StoryLines.js";
 import Button from "@mui/material/Button";
 
+import Dictionary from "./Dictionary.js";
+
 function StoryContainer({ bookId }) {
   // console.log("USEPARAMS", bookId);
 
   const [toolbar, setToolbar] = useState(false);
   // const [book, setBook] = useState({ lines: {} });
-//   const history = useHistory();
+  //   const history = useHistory();
 
+  //dicitonary
+  const [dictionary, setDictionary] = useState(false);
 
   // notes
   const [notes, setNotes] = useState([]);
-  const [noteChanged, setNoteChanged] = useState(false)
+  const [noteChanged, setNoteChanged] = useState(false);
 
   //pagination
   const [pageNumber, setPageNumber] = useState(1);
@@ -24,10 +28,15 @@ function StoryContainer({ bookId }) {
   const [loading, setLoading] = useState(true);
   const observer = useRef();
 
-//id  of lines
+  //id  of lines
   // console.log("OBSERVER", observer);
 
- 
+  //onMouseUp e
+
+  const [lookUp, setLookUp] = useState("");
+  const addLookUp = (word) => {
+    setLookUp(word);
+  };
 
   const lastElementRef = useCallback(
     (node) => {
@@ -35,7 +44,8 @@ function StoryContainer({ bookId }) {
       if (loading) return;
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && hasMore) { //if the node observer is observing is on the page add 1 to pageNumber
+        if (entries[0].isIntersecting && hasMore) {
+          //if the node observer is observing is on the page add 1 to pageNumber
           setPageNumber((prevPageNumber) => prevPageNumber + 1);
         }
       });
@@ -57,7 +67,7 @@ function StoryContainer({ bookId }) {
         setLines(lines.concat(data));
         setHasMore(data.length > 0);
         setLoading(false);
-        console.log("LINES", lines)
+        console.log("LINES", lines);
       });
   };
 
@@ -74,7 +84,6 @@ function StoryContainer({ bookId }) {
   //       setLines(data);
   //     });
   // };
-
 
   const highlightLine = (formData) => {
     console.log("formData", formData);
@@ -103,7 +112,6 @@ function StoryContainer({ bookId }) {
       });
   };
 
-
   const deleteNote = (id) => {
     fetch(`http://localhost:4000/notes/${id}`, {
       method: "DELETE",
@@ -112,26 +120,24 @@ function StoryContainer({ bookId }) {
         Authorization: `Bearer ${localStorage.token}`,
         Accept: "application/json",
       },
-    }).then((res) => {
-      if (res.ok) {
-      return res.json()
-      } else {
-        //  return res.json().then((err) => setFormErrors(err));
-        return res
-          .json()
-          .then((errors) => Promise.reject(errors));
-      }
     })
-      .then((line) => {
-        insertLine(line[0])  //return  whole line
-        setNoteChanged(!noteChanged)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          //  return res.json().then((err) => setFormErrors(err));
+          return res.json().then((errors) => Promise.reject(errors));
+        }
       })
-    };
-  
+      .then((line) => {
+        insertLine(line[0]); //return  whole line
+        setNoteChanged(!noteChanged);
+      });
+  };
+
   // const updatedNotes = lines.filter((line) => line.note.id !== id);
   // setNotes(updatedNotes);
   // setNoteChanged(true);
-
 
   const addNote = (formData) => {
     console.log("ADD NOTE", formData);
@@ -156,37 +162,39 @@ function StoryContainer({ bookId }) {
         }
       })
       .then((line) => {
-        insertLine(line[0])  //return  whole line
-        setNoteChanged(true)
-      })
+        insertLine(line[0]); //return  whole line
+        setNoteChanged(true);
+      });
   };
 
   const insertLine = (line) => {
-    console.log("Line with new note", line)
+    console.log("Line with new note", line);
 
-    const oldLine = lines.filter(l => l.id === line.id)
-    const index = lines.indexOf(oldLine[0])
-    lines.splice(index, 1, line)
-    const newLines = lines //splice removed the old line
-    setLines(newLines)
+    const oldLine = lines.filter((l) => l.id === line.id);
+    const index = lines.indexOf(oldLine[0]);
+    lines.splice(index, 1, line);
+    const newLines = lines; //splice removed the old line
+    setLines(newLines);
 
-    console.log("THIS IS THE LINE", line)
-   
+    console.log("THIS IS THE LINE", line);
+  };
 
+  function getSelectionText() {
+    var text = "";
+    if (window.getSelection) {
+      text = window.getSelection().toString();
+
+      addLookUp(text);
+    } else if (document.selection && document.selection.type != "Control") {
+      text = document.selection.createRange().text;
+    }
+
+    setDictionary(true) //shows  dictioanry
   }
 
-  // const insertLineBack = (line) => {
-  //   const index = lines.findIndex(line => line.id === lines.id)
-  //   console.log("LINEINDEX",index)
-  // }
-
-   // const insertBack = (line) => {
-
-  //   const index = lines.findIndex(line => line.id === lines.id)
-  //     const newLines = [...lines.slice(0, index), line, ...lines.slice(index + 1)]
-  //     setLines(newLines)
-
-  //   }
+  function closeDictionary(){
+    setDictionary(false)
+  }
 
 
   useEffect(() => {
@@ -198,9 +206,18 @@ function StoryContainer({ bookId }) {
     setToolbar(!toolbar);
   };
 
+  useEffect(() => {
+    console.log("STORYCONTAINER STRING", lookUp);
+
+  }, [lookUp]);
   return (
     <>
       <Container>
+        {dictionary ? (
+          <Dictionary lookUp={lookUp} setLookUp={setLookUp} closeDictionary={closeDictionary} />
+        ) : (
+          <> </>
+        )}
         <Box>
           {" "}
           <Button onClick={showToolbar}> Show Toolbar</Button>
@@ -212,42 +229,46 @@ function StoryContainer({ bookId }) {
             if (lines.length === index + 1) {
               return (
                 <div ref={lastElementRef} style={{ display: "inline-flex" }}>
-
-                  {noteChanged ?  <div style={{ display: "inline-flex" }}>
-                    <StoryLines
-                      key={line.id}
-                      setNoteChanged={setNoteChanged}
-                      lineObj={line}
-                      highlightLine={highlightLine}
-                      addNote={addNote}
-                      notes={notes}
-                      setNotes={setNotes}
-                      showToolbar={showToolbar}
-                      toolbar={toolbar}
-                      deleteNote={deleteNote}
-                    />
-                  </div> :
-                  <div style={{ display: "inline-flex" }}>
-                    <StoryLines
-                      key={line.id}
+                  {noteChanged ? (
+                    <div style={{ display: "inline-flex" }}>
+                      <StoryLines
+                        key={line.id}
                         setNoteChanged={setNoteChanged}
-                      lineObj={line}
-                      highlightLine={highlightLine}
-                      addNote={addNote}
-                      notes={notes}
-                      setNotes={setNotes}
-                      showToolbar={showToolbar}
-                      toolbar={toolbar}
-                      deleteNote={deleteNote}
-                    />
-                  </div>}
+                        lineObj={line}
+                        highlightLine={highlightLine}
+                        addNote={addNote}
+                        notes={notes}
+                        setNotes={setNotes}
+                        showToolbar={showToolbar}
+                        toolbar={toolbar}
+                        deleteNote={deleteNote}
+                        addLookUp={addLookUp}
+                        getSelectionText={getSelectionText}
+                      />
+                    </div>
+                  ) : (
+                    <div style={{ display: "inline-flex" }}>
+                      <StoryLines
+                        key={line.id}
+                        setNoteChanged={setNoteChanged}
+                        lineObj={line}
+                        highlightLine={highlightLine}
+                        addNote={addNote}
+                        notes={notes}
+                        setNotes={setNotes}
+                        showToolbar={showToolbar}
+                        toolbar={toolbar}
+                        deleteNote={deleteNote}
+                        addLookUp={addLookUp}
+                        getSelectionText={getSelectionText}
+                      />
+                    </div>
+                  )}
                 </div>
               );
             } else {
-              return (
-
-
-                noteChanged ?  <div style={{ display: "inline-flex" }}>
+              return noteChanged ? (
+                <div style={{ display: "inline-flex" }}>
                   <StoryLines
                     key={line.id}
                     setNoteChanged={setNoteChanged}
@@ -259,13 +280,16 @@ function StoryContainer({ bookId }) {
                     showToolbar={showToolbar}
                     toolbar={toolbar}
                     deleteNote={deleteNote}
+                    addLookUp={addLookUp}
+                    getSelectionText={getSelectionText}
                   />
-                </div> :
+                </div>
+              ) : (
                 <div style={{ display: "inline-flex" }}>
                   <StoryLines
                     key={line.id}
-                     noteChanged={noteChanged}
-                      setNoteChanged={setNoteChanged}
+                    noteChanged={noteChanged}
+                    setNoteChanged={setNoteChanged}
                     lineObj={line}
                     highlightLine={highlightLine}
                     addNote={addNote}
@@ -274,6 +298,8 @@ function StoryContainer({ bookId }) {
                     showToolbar={showToolbar}
                     toolbar={toolbar}
                     deleteNote={deleteNote}
+                    addLookUp={addLookUp}
+                    getSelectionText={getSelectionText}
                   />
                 </div>
               );
@@ -288,28 +314,27 @@ function StoryContainer({ bookId }) {
 
 export default StoryContainer;
 
-  // const insertBack = (line) => {
+// const insertBack = (line) => {
 
-  //   const index = lines.findIndex(line => line.id === lines.id)
-  //     const newLines = [...lines.slice(0, index), line, ...lines.slice(index + 1)]
-  //     setLines(newLines)
+//   const index = lines.findIndex(line => line.id === lines.id)
+//     const newLines = [...lines.slice(0, index), line, ...lines.slice(index + 1)]
+//     setLines(newLines)
 
-  //   }
+//   }
 
+// useEffect(() => {
+//   setError(false);
+//   fetchBook();
+// }, [notes]);
 
-  // useEffect(() => {
-  //   setError(false);
-  //   fetchBook();
-  // }, [notes]);
-
-  // const fetchBook = () => {
-  //   fetch(`/books/${bookId}`, {
-  //     headers: {
-  //       Authorization: `Bearer ${localStorage.token}`,
-  //       "Content-Type": "application/json",
-  //       Accept: "application/json",
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => setBook(data));
-  // };
+// const fetchBook = () => {
+//   fetch(`/books/${bookId}`, {
+//     headers: {
+//       Authorization: `Bearer ${localStorage.token}`,
+//       "Content-Type": "application/json",
+//       Accept: "application/json",
+//     },
+//   })
+//     .then((res) => res.json())
+//     .then((data) => setBook(data));
+// };

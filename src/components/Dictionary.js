@@ -9,11 +9,10 @@ import Card from "@mui/material/Card";
 function Dictionary({ lookUp, setLookUp, closeDictionary }) {
   const [wordsArray, setWordsArray] = useState([]);
   const [fontSize, setFontSize] = useState(0);
-  const [definition, setDefinition] = useState("")
+  const [definition, setDefinition] = useState("");
 
-  
   useEffect(() => {
-    setDefinition("")
+    setDefinition("");
     let lookUpWords = lookUp;
     console.log("FIRST", lookUpWords);
     const splitWords = lookUpWords.split(" ");
@@ -37,7 +36,6 @@ function Dictionary({ lookUp, setLookUp, closeDictionary }) {
     }
 
     console.log("fontsize", fontSize);
-  
   }, [lookUp]);
 
   console.log("These are the words ", wordsArray);
@@ -56,17 +54,34 @@ function Dictionary({ lookUp, setLookUp, closeDictionary }) {
   };
 
   const handleDefine = (e) => {
-    setDefinition("")
+    setDefinition("");
     console.log("clicked", e.target.textContent);
-    const clickedWord = e.target.textContent
-    fetchTranslations(clickedWord)
+    const clickedWord = e.target.textContent.toLowerCase();
+    console.log("clicked word", clickedWord);
+
+    const punctuation = [",", ".", "?", ";", "/"];
+
+    [...clickedWord].map((letter) => {
+      if (punctuation.includes(letter)) {
+        console.log(letter);
+        const newWord = clickedWord.replace(letter, '')
+        console.log("REPLACE", newWord)
+        fetchTranslations(newWord)
+      } else {
+        console.log("fine");
+      }
+    });
+
+    fetchTranslations(clickedWord);
   };
 
   const fetchTranslations = (word) => {
-    fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=b033b3b4-4766-4db1-8f40-6af316839bf5`)
-      .then(res => res.json())
-      .then(data => setDefinition(data[0].shortdef[0]))
-  }
+    fetch(
+      `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=b033b3b4-4766-4db1-8f40-6af316839bf5`
+    )
+      .then((res) => res.json())
+      .then((data) => setDefinition(data[0].shortdef[0]));
+  };
 
   return (
     <>
@@ -75,17 +90,17 @@ function Dictionary({ lookUp, setLookUp, closeDictionary }) {
           mt: "40px",
           width: "550px",
 
-          backgroundColor: "primary.light",
-          opacity: [0.8, 0.8, 0.9],
+          backgroundColor: "palette.secondary.light",
+          opacity: [0.8, 1, 0.9],
           "&:hover": {
-            backgroundColor: "primary.main",
-            opacity: [1, 0.8, 1],
+            backgroundColor: "palette.primary.light",
+            opacity: [1, 1, 1],
           },
         }}
         style={{
           position: "fixed",
-          background: "black",
-          color: "white",
+          background: "#222222",
+          color: "#ffffe0",
           padding: "10px",
         }}
       >
@@ -109,8 +124,14 @@ function Dictionary({ lookUp, setLookUp, closeDictionary }) {
                   <span onClick={(e) => handleDefine(e)}>{word} </span>
                 ))}
 
-                
-                {definition ? <Box sx={{ fontSize: fontSize, color: "yellow" }}>{definition}</Box> : <></>}
+                {definition ? (
+                  <Box sx={{ fontSize: 20, color: "light-yellow" }}>
+                    <b>Definition: </b>
+                    {definition}
+                  </Box>
+                ) : (
+                  <></>
+                )}
               </Box>
             </Container>
           </Box>

@@ -67,7 +67,7 @@ function StoryContainer({ bookId }) {
         setLines(lines.concat(data));
         setHasMore(data.length > 0);
         setLoading(false);
-        console.log("LINES", lines);
+        // console.log("LINES", lines);
       });
   };
 
@@ -179,24 +179,32 @@ function StoryContainer({ bookId }) {
     console.log("THIS IS THE LINE", line);
   };
 
-  function getSelectionText() {
-    var text = "";
-    if (window.getSelection) {
-      text = window.getSelection().toString();
+  function getSelectionText(e) {
+    e.preventDefault();
+    let text = "";
+    setDictionary(false);
+    text = window.getSelection().toString();
+    const newText = text;
+  
+    // } else if (document.selection && document.selection.type != "Control") {
+    //   text = document.selection.createRange().text
+    // }
+    const punctuation = [",", ".", "?", ";", "/", " "];
 
-      addLookUp(text);
-    } else if (document.selection && document.selection.type != "Control") {
-      text = document.selection.createRange().text;
+    if (newText.trim() === "" || punctuation.includes(newText.trim())) {
+      setDictionary(false);
+      console.log("FALSE", newText);
+    } else {
+      addLookUp(newText);
+      setDictionary(true);
+      console.log("TRUE", newText);
     }
-
-    
-    setDictionary(true) //shows  dictioanry
+    //shows  dictioanry
   }
 
-  function closeDictionary(){
-    setDictionary(false)
+  function closeDictionary() {
+    setDictionary(false);
   }
-
 
   useEffect(() => {
     setLoading(true);
@@ -209,19 +217,20 @@ function StoryContainer({ bookId }) {
 
   useEffect(() => {
     console.log("STORYCONTAINER STRING", lookUp);
-
-  }, [lookUp]);
+  }, []);
   return (
     <>
       <Container>
-      
         <Box>
           {dictionary ? (
-            <Dictionary lookUp={lookUp} setLookUp={setLookUp} closeDictionary={closeDictionary} />
+            <Dictionary
+              lookUp={lookUp}
+              setLookUp={setLookUp}
+              closeDictionary={closeDictionary}
+            />
           ) : (
             <> </>
-          )}
-          {" "}
+          )}{" "}
           <Button onClick={showToolbar}> Show Toolbar</Button>
         </Box>
 
@@ -232,7 +241,7 @@ function StoryContainer({ bookId }) {
               return (
                 <div ref={lastElementRef} style={{ display: "inline-flex" }}>
                   {noteChanged ? (
-                    <div style={{ display: "inline-flex" }}>
+                    <div >
                       <StoryLines
                         key={line.id}
                         setNoteChanged={setNoteChanged}
@@ -249,7 +258,7 @@ function StoryContainer({ bookId }) {
                       />
                     </div>
                   ) : (
-                    <div style={{ display: "inline-flex" }}>
+                    <div >
                       <StoryLines
                         key={line.id}
                         setNoteChanged={setNoteChanged}
@@ -270,7 +279,7 @@ function StoryContainer({ bookId }) {
               );
             } else {
               return noteChanged ? (
-                <div style={{ display: "inline-flex" }}>
+                <div >
                   <StoryLines
                     key={line.id}
                     setNoteChanged={setNoteChanged}
@@ -287,7 +296,7 @@ function StoryContainer({ bookId }) {
                   />
                 </div>
               ) : (
-                <div style={{ display: "inline-flex" }}>
+                <div >
                   <StoryLines
                     key={line.id}
                     noteChanged={noteChanged}

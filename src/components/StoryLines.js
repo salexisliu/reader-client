@@ -131,19 +131,21 @@ function StoryLines({
       ) : (
         <></>
       )}
-      <>
+      <div style={{ display: "inline-flex" }}>
         {isHighlighted ? (
-          <h4 onMouseUp={getSelectionText} style={{ color: "orange" }} key={lineObj.id}>
-            {lineObj.id}
+       
+          <Typography display="block" style={{ color: "orange" , "text-indent": "2em" }} variant="body1"  gutterBottom onMouseUp={(e) => getSelectionText(e)} key={lineObj.id}>
+          
             {lineObj.content}
-          </h4>
+
+          </Typography>
         ) : (
-            <h4 onMouseUp={getSelectionText}  >
-            {lineObj.id}
+            <Typography display= "block" style={{ "text-indent": "2em"}} variant="body1" gutterBottom onMouseUp={(e) => getSelectionText(e)}  >
+        
             {lineObj.content}
-          </h4>
+            </Typography>
         )}
-      </>
+  
       {hasNote ? <Button onClick={toggleNote}>see note</Button> : <></>}
 
       {showNote ? (
@@ -165,6 +167,7 @@ function StoryLines({
       ) : (
         <></>
       )}
+      </div>
     </>
   );
 }

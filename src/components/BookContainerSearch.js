@@ -12,7 +12,7 @@ console.log(searchQuery)
       <TextField
         id="standard-search"
         label="Search field"
- AS       type="search"
+      type="search"
         value={searchQuery}
         onInput={e => setSearchQuery(e.target.value)}
         sx={{ m: 1, width: '25ch' }}

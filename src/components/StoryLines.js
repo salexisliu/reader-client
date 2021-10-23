@@ -9,6 +9,7 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import NoteIndex from "./NoteIndex.js";
 import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 
 function StoryLines({
   setNoteChanged,

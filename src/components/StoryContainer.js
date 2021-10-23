@@ -189,6 +189,7 @@ function StoryContainer({ bookId }) {
       text = document.selection.createRange().text;
     }
 
+    
     setDictionary(true) //shows  dictioanry
   }
 
@@ -213,12 +214,13 @@ function StoryContainer({ bookId }) {
   return (
     <>
       <Container>
-        {dictionary ? (
-          <Dictionary lookUp={lookUp} setLookUp={setLookUp} closeDictionary={closeDictionary} />
-        ) : (
-          <> </>
-        )}
+      
         <Box>
+          {dictionary ? (
+            <Dictionary lookUp={lookUp} setLookUp={setLookUp} closeDictionary={closeDictionary} />
+          ) : (
+            <> </>
+          )}
           {" "}
           <Button onClick={showToolbar}> Show Toolbar</Button>
         </Box>

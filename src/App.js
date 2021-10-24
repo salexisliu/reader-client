@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react";
-
+import { useHistory } from "react-router-dom";
 import AuthenticatedApp from "./AuthenticatedApp.js";
 import UnAuthenticatedApp from "./UnAuthenticatedApp.js";
-import {
-  BrowserRouter as Router,
-} from "react-router-dom";
-
+import { BrowserRouter as Router } from "react-router-dom";
 
 export default function App() {
+  const history = useHistory();
   const [user, setUser] = useState({});
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(null);
 
   function setCurrentUser(currentUser) {
     setUser(currentUser);
@@ -20,7 +18,6 @@ export default function App() {
     setUser({});
     setLoggedIn(false);
     localStorage.token = "";
-    
   }
 
   useEffect(() => {
@@ -49,19 +46,23 @@ export default function App() {
   }, []);
 
   return (
-    <Router>
-      {loggedIn ? (
-        <AuthenticatedApp loggedIn = {loggedIn} logOut={logOut} />
-      ) : (
-        <>
-          <UnAuthenticatedApp
-            setUser={setUser}
-            loggedIn={loggedIn}
-            setLoggedIn={setLoggedIn}
-          />
-        </>
+    <div>
+      {loggedIn !== null && (
+        <Router>
+          {loggedIn ? (
+            <AuthenticatedApp loggedIn={loggedIn} logOut={logOut} user={user} />
+          ) : (
+            <>
+              <UnAuthenticatedApp
+                setUser={setUser}
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
+              />
+            </>
+          )}
+        </Router>
       )}
-    </Router>
+    </div>
   );
 }
 

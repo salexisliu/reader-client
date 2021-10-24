@@ -4,7 +4,13 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 
 function UnAuthenticatedApp({ setUser, loggedIn, setLoggedIn }) {
+  console.log("ON PAGE UNAUTH")
   return (
+<>
+      <div className="please-log-in">
+     
+          <h3>Please log in below!</h3>
+        </div>
     <Switch>
       <Route exact path="/">
         <Login setUser={setUser} setLoggedIn={setLoggedIn} />
@@ -13,18 +19,9 @@ function UnAuthenticatedApp({ setUser, loggedIn, setLoggedIn }) {
         <SignUp setUser={setUser} />
       </Route>
 
-      <Route exact path="/login">
-        {loggedIn ? (
-          <Redirect to="/" />
-        ) : (
-          <Login
-            setUser={setUser}
-            loggedIn={loggedIn}
-            setLoggedIn={setLoggedIn}
-          />
-        )}
-      </Route>
+      <Redirect to="/" />
     </Switch>
+    </>
   );
 }
 

@@ -36,7 +36,7 @@ function NavBar({logOut}) {
         <List>
        
      
-          <ListItem >   <ListItemIcon><MailIcon/></ListItemIcon><NavLink className="navlink" to="/home">Home</NavLink>  </ListItem>
+          <ListItem >   <ListItemIcon><MailIcon/></ListItemIcon><NavLink className="navlink" to="/">Home</NavLink>  </ListItem>
      
           <ListItem >  <ListItemIcon><MailIcon /></ListItemIcon> <NavLink className="navlink" to="/books">Texts </NavLink> </ListItem>
            

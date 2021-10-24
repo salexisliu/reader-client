@@ -41,10 +41,15 @@ function Dictionary({ lookUp, setLookUp, closeDictionary }) {
   console.log("These are the words ", wordsArray);
 
   var synth = window.speechSynthesis;
-
+  const clickSpeak = (word) => {
+    let utterance = new SpeechSynthesisUtterance(word);
+    synth.speak(utterance);
+    console.log("UTTER", utterance)
+  };
   const speak = (word) => {
     let utterance = new SpeechSynthesisUtterance(word);
     synth.speak(utterance);
+  
   };
   const handleSpeakClick = () => {
     speak(lookUp);
@@ -54,6 +59,7 @@ function Dictionary({ lookUp, setLookUp, closeDictionary }) {
   };
 
   const handleDefine = (e) => {
+    
     setDefinition("");
     console.log("clicked", e.target.textContent);
     const clickedWord = e.target.textContent.toLowerCase();
@@ -67,11 +73,13 @@ function Dictionary({ lookUp, setLookUp, closeDictionary }) {
         const newWord = clickedWord.replace(letter, '')
         console.log("REPLACE", newWord)
         fetchTranslations(newWord)
+        clickSpeak(newWord)
       } else {
         console.log("fine");
+    
       }
     });
-
+    clickSpeak(clickedWord)
     fetchTranslations(clickedWord);
   };
 
@@ -121,7 +129,7 @@ function Dictionary({ lookUp, setLookUp, closeDictionary }) {
             <Container display="flex" alignItems="flex-start">
               <Box sx={{ fontSize: fontSize }}>
                 {wordsArray.map((word) => (
-                  <span onClick={(e) => handleDefine(e)}>{word} </span>
+                  <span key={word} onClick={(e) => handleDefine(e)}>{word} </span>
                 ))}
 
                 {definition ? (

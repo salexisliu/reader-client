@@ -15,8 +15,6 @@ function BookCard({book, deleteBook}) {
     history.push(`/read/${id}`);
   }
 
-
-
   return (
     <>
       <Grid
@@ -41,7 +39,7 @@ function BookCard({book, deleteBook}) {
         </CardActionArea>
         <CardActions>
           <Button size="small" color="primary">
-            Edit Details
+              <Button onClick={() => handleClick(book.id)}>See Notes</Button>
           </Button>
             <Button onClick={() => deleteBook(book.id)}>Delete</Button>
         </CardActions>

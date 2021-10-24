@@ -5,10 +5,11 @@ import BookContainer from "./components/BookContainer";
 import BookForm from "./components/BookForm";
 import NavBar from "./NavBar";
 import Box from "@mui/material/Box";
+import NotesContainer from "./components/NotesContainer";
 
 import Header from "./Header";
 
-function AuthenticatedApp({ logOut, loggedIn }) {
+function AuthenticatedApp({ logOut, loggedIn, user }) {
   return (
     <BrowserRouter>
       <div className="App">
@@ -40,8 +41,18 @@ function AuthenticatedApp({ logOut, loggedIn }) {
               }}
             />
 
-            <Route path="/">
-              <h1>Homepage</h1>
+            <Route
+              exact
+              path="/notes/:id"
+              render={({ match }) => {
+                return <NotesContainer loggedIn={loggedIn} bookId={match.params.id} />;
+              }}
+            />
+
+
+            <Route exact path="/">
+              <h1>Homepage</h1><br></br>
+              {/* <h1 className="greeting-text">Welcome back {user.username}!</h1> */}
             </Route>
           </Switch>
         </Box>

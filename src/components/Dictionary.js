@@ -32,6 +32,7 @@ function Dictionary({ lookUp, setLookUp, closeDictionary }) {
     } else if (result.length < 300) {
       setFontSize(14);
     } else if (result.length >= 300) {
+      
       alert("too much");
     }
 
@@ -44,12 +45,11 @@ function Dictionary({ lookUp, setLookUp, closeDictionary }) {
   const clickSpeak = (word) => {
     let utterance = new SpeechSynthesisUtterance(word);
     synth.speak(utterance);
-    console.log("UTTER", utterance)
+    console.log("UTTER", utterance);
   };
   const speak = (word) => {
     let utterance = new SpeechSynthesisUtterance(word);
     synth.speak(utterance);
-  
   };
   const handleSpeakClick = () => {
     speak(lookUp);
@@ -59,7 +59,6 @@ function Dictionary({ lookUp, setLookUp, closeDictionary }) {
   };
 
   const handleDefine = (e) => {
-    
     setDefinition("");
     console.log("clicked", e.target.textContent);
     const clickedWord = e.target.textContent.toLowerCase();
@@ -70,16 +69,15 @@ function Dictionary({ lookUp, setLookUp, closeDictionary }) {
     [...clickedWord].map((letter) => {
       if (punctuation.includes(letter)) {
         console.log(letter);
-        const newWord = clickedWord.replace(letter, '')
-        console.log("REPLACE", newWord)
-        fetchTranslations(newWord)
-        clickSpeak(newWord)
+        const newWord = clickedWord.replace(letter, "");
+        console.log("REPLACE", newWord);
+        fetchTranslations(newWord);
+        clickSpeak(newWord);
       } else {
         console.log("fine");
-    
       }
     });
-    clickSpeak(clickedWord)
+    clickSpeak(clickedWord);
     fetchTranslations(clickedWord);
   };
 
@@ -129,7 +127,9 @@ function Dictionary({ lookUp, setLookUp, closeDictionary }) {
             <Container display="flex" alignItems="flex-start">
               <Box sx={{ fontSize: fontSize }}>
                 {wordsArray.map((word) => (
-                  <span key={word} onClick={(e) => handleDefine(e)}>{word} </span>
+                  <span key={word} onClick={(e) => handleDefine(e)}>
+                    {word}{" "}
+                  </span>
                 ))}
 
                 {definition ? (

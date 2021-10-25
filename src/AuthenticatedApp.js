@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import NotesContainer from "./components/NotesContainer";
 
 import Header from "./Header";
+import VocabularyPage from "./components/VocabularyPage";
 
 function AuthenticatedApp({ logOut, loggedIn, user }) {
   return (
@@ -33,6 +34,12 @@ function AuthenticatedApp({ logOut, loggedIn, user }) {
               <BookForm />
             </Route>
 
+
+            <Route path="/flashcards">
+              <VocabularyPage loggedIn={loggedIn}/>
+            </Route>
+
+
             <Route
               exact
               path="/read/:id"
@@ -48,6 +55,16 @@ function AuthenticatedApp({ logOut, loggedIn, user }) {
                 return <NotesContainer loggedIn={loggedIn} bookId={match.params.id} />;
               }}
             />
+
+
+            <Route
+              exact
+              path="/flashcards/:id"
+              render={({ match }) => {
+                return <VocabularyPage loggedIn={loggedIn} bookId={match.params.id} />;
+              }}
+            />
+
 
 
             <Route exact path="/">

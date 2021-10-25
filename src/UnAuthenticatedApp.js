@@ -4,7 +4,7 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 
 function UnAuthenticatedApp({ setUser, loggedIn, setLoggedIn }) {
-  console.log("ON PAGE UNAUTH")
+  console.log("NOT LOGGED IN")
   return (
 <>
       <div className="please-log-in">

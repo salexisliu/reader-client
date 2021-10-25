@@ -43,7 +43,7 @@ function NavBar({logOut}) {
           {/* <ListItem >  <ListItemIcon><MailIcon /></ListItemIcon> <NavLink className="navlink" to="/read">Story  </NavLink></ListItem> */}
 
           <ListItem >  <ListItemIcon><MailIcon /></ListItemIcon> <NavLink className="navlink" to="/upload">Import Texts </NavLink></ListItem>
-          
+          <ListItem >  <ListItemIcon><MailIcon /></ListItemIcon> <NavLink className="navlink" to="/flashcards">Vocabulary </NavLink></ListItem>
         </List>
         <Divider />
         {/* <List>

@@ -4,8 +4,12 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import StoryLines from "./StoryLines.js";
 import Button from "@mui/material/Button";
-
 import Dictionary from "./Dictionary.js";
+
+//icons
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import VolumeOffIcon from '@mui/icons-material/VolumeOff';
+import SpellcheckIcon from '@mui/icons-material/Spellcheck';
 
 function StoryContainer({ bookId }) {
   // console.log("USEPARAMS", bookId);
@@ -16,7 +20,8 @@ function StoryContainer({ bookId }) {
 
   //dicitonary
   const [dictionary, setDictionary] = useState(false);
-
+  const [soundOn, setSoundOn] = useState(false);
+  const [defineOn, setDefineOn] = useState(false);
   // notes
   const [notes, setNotes] = useState([]);
   const [noteChanged, setNoteChanged] = useState(false);
@@ -54,6 +59,15 @@ function StoryContainer({ bookId }) {
     [loading, hasMore]
   );
 
+  const turnSoundOn = () => {
+    setSoundOn(!soundOn);
+    console.log("SOUND", soundOn )
+  }
+
+  const turnDefineOn = () => {
+    setDefineOn(!defineOn);
+    console.log("SOUND", defineOn)
+  }
   const fetchLines = () => {
     fetch(`http://localhost:3000/linebybook/${bookId}?page=${pageNumber}`, {
       headers: {
@@ -185,11 +199,11 @@ function StoryContainer({ bookId }) {
     setDictionary(false);
     text = window.getSelection().toString();
     const newText = text;
-  
+
     // } else if (document.selection && document.selection.type != "Control") {
     //   text = document.selection.createRange().text
     // }
-    const punctuation = [",", ".", "?", ";", "/", " "];
+    const punctuation = [",", ".", "?", ";", "/", " ", "—", "_"];
 
     if (newText.trim() === "" || punctuation.includes(newText.trim())) {
       setDictionary(false);
@@ -227,11 +241,18 @@ function StoryContainer({ bookId }) {
               lookUp={lookUp}
               setLookUp={setLookUp}
               closeDictionary={closeDictionary}
+              soundOn = {soundOn}
+              defineOn = {defineOn}
+              bookId = {bookId}
             />
           ) : (
             <> </>
           )}{" "}
           <Button onClick={showToolbar}> Show Toolbar</Button>
+          {soundOn ? <Button onClick={turnSoundOn}><VolumeUpIcon /></Button> : 
+            <Button onClick={turnSoundOn}><VolumeOffIcon color="disabled" /></Button> }
+
+          {defineOn ? <Button onClick={turnDefineOn}><SpellcheckIcon /></Button> : <Button onClick={turnDefineOn}><SpellcheckIcon color="disabled" /></Button>}
         </Box>
 
         {lines
@@ -241,7 +262,7 @@ function StoryContainer({ bookId }) {
               return (
                 <div ref={lastElementRef} style={{ display: "inline-flex" }}>
                   {noteChanged ? (
-                    <div >
+                    <div>
                       <StoryLines
                         key={line.id}
                         setNoteChanged={setNoteChanged}
@@ -258,7 +279,7 @@ function StoryContainer({ bookId }) {
                       />
                     </div>
                   ) : (
-                    <div >
+                    <div>
                       <StoryLines
                         key={line.id}
                         setNoteChanged={setNoteChanged}
@@ -279,7 +300,7 @@ function StoryContainer({ bookId }) {
               );
             } else {
               return noteChanged ? (
-                <div >
+                <div>
                   <StoryLines
                     key={line.id}
                     setNoteChanged={setNoteChanged}
@@ -296,7 +317,7 @@ function StoryContainer({ bookId }) {
                   />
                 </div>
               ) : (
-                <div >
+                <div>
                   <StoryLines
                     key={line.id}
                     noteChanged={noteChanged}

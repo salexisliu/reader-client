@@ -30,7 +30,8 @@ function StoryLines({
   const [showNote, setShowNote] = useState(false);
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
-
+ 
+ 
   const handleClickOpen = () => {
     setOpen(!open);
   };
@@ -134,13 +135,13 @@ function StoryLines({
       <div style={{ display: "inline-flex" }}>
         {isHighlighted ? (
        
-          <Typography display="block" style={{ color: "orange" , "text-indent": "2em" }} variant="body1"  gutterBottom onMouseUp={(e) => getSelectionText(e)} key={lineObj.id}>
+          <Typography display="block" style={{ color: "orange" , "text-indent": "2em" }} variant="h5"  gutterBottom onMouseUp={(e) => getSelectionText(e)} key={lineObj.id}>
           
             {lineObj.content}
 
           </Typography>
         ) : (
-            <Typography display= "block" style={{ "text-indent": "2em"}} variant="body1" gutterBottom onMouseUp={(e) => getSelectionText(e)}  >
+            <Typography display= "block" style={{ "text-indent": "2em"}} variant="h5" gutterBottom onMouseUp={(e) => getSelectionText(e)}  >
         
             {lineObj.content}
             </Typography>

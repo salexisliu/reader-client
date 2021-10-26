@@ -3,12 +3,30 @@ import { useHistory } from "react-router-dom";
 import AuthenticatedApp from "./AuthenticatedApp.js";
 import UnAuthenticatedApp from "./UnAuthenticatedApp.js";
 import { BrowserRouter as Router } from "react-router-dom";
+import { BookOnlineSharp } from "@mui/icons-material";
 
 export default function App() {
   const history = useHistory();
   const [user, setUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [authChecked, setAuthChecked] = useState(false)
+  const [bg, setBG] = useState([])
+
+
+  useEffect(() => {
+
+    fetch("/getbookbg", {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((books) => {
+        setBG(books)
+      })
+      ;
+  }, [])
 
   function setCurrentUser(currentUser) {
     setUser(currentUser);
@@ -21,7 +39,10 @@ export default function App() {
     localStorage.token = "";
   }
 
+
   useEffect(() => {
+  
+   
     const token = localStorage.token;
     if (
       typeof token !== "undefined" &&
@@ -52,13 +73,17 @@ export default function App() {
   if (!authChecked) { return <div></div> }
   return (
     <div className = "bg">
+      <div>
+
       {/* {loggedIn !== null && ( */}
         <Router>
           {loggedIn ? (
-            <AuthenticatedApp loggedIn={loggedIn} logOut={logOut} user={user} />
+            
+            <AuthenticatedApp bg = {bg} loggedIn={loggedIn} logOut={logOut} user={user} />
           ) : (
             <>
               <UnAuthenticatedApp 
+                  bg={bg}
                 setUser={setUser}
                 loggedIn={loggedIn}
                 setLoggedIn={setLoggedIn}
@@ -67,6 +92,7 @@ export default function App() {
           )}
         </Router>
      {/* )} */}
+      </div>
     </div>
   );
 }

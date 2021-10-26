@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import EnhancedTable from "./EnhancedTable";
+import Button from "@mui/material/Button";
 
 function VocabularyPage() {
   const [vocab, setVocab] = useState([]);
-  const [newVocab, setNewVocab] = useState([]);
+  const [newVocab, setNewVocab] = useState(false);
 
 
   useEffect(() => {
     fetchVocab();
-  }, [vocab]);
+  }, [newVocab]);
 
   const fetchVocab = () => {
     fetch("/flashcards", {
@@ -23,20 +24,22 @@ function VocabularyPage() {
   };
 
   const deleteVocabWord = (words) => {
+    console.log("STATE BEFORE", vocab)
     console.log(words);
     console.log(vocab);
 
     const findWords = vocab.filter((v) => words.includes(v.term));
     console.log("NEW", findWords);
 
-   const wordsList = deletePop(findWords)
+  deletePop(findWords)
 
     console.log("DELETEDHI", findWords);
-    console.log("VOCAB LIST", vocab);
+    console.log("STATE AFTER", vocab);
 
-    setVocab(vocab)
     
     // const deletedWord = v.id !== id);
+    setVocab(vocab)
+    setNewVocab(!newVocab)
     //   setVocab(updatedVocab)
 
     
@@ -114,10 +117,11 @@ console.log("deletedWorrsd", deletedWords)
   // };
 
 
-
-
   return (
     <>
+
+
+
       <EnhancedTable flashcards={vocab} deleteVocabWord={deleteVocabWord} />
     </>
   );

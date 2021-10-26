@@ -24,7 +24,7 @@ function BookCard({book, deleteBook}) {
       <Grid
         item
         xs={3}>
-        <Card sx={{ maxWidth: 200, minHeight: 370 }}>
+        <Card sx={{ maxWidth: 200}}>
           <CardActionArea onClick={() => handleClick(book.id)}>
           <CardMedia
             component="img"

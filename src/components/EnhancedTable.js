@@ -269,7 +269,7 @@ export default function EnhancedTable({ flashcards, deleteVocabWord}) {
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
+            size="medium"
           >
             <EnhancedTableHead
               numSelected={selected.length}
@@ -343,10 +343,7 @@ export default function EnhancedTable({ flashcards, deleteVocabWord}) {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
+    
     </Box>
   );
 }

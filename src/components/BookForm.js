@@ -22,6 +22,10 @@ function BookForm({}) {
   
     console.log("FULL TEXT", bookText);
 
+
+    const summaryText = bookText.substring(0, 100)
+    console.log("SUMMARY", summaryText)
+
     const splitText = bookText.split(/\n/);
     const result = splitText.filter((n) => n !== "");
 
@@ -34,7 +38,8 @@ function BookForm({}) {
     createBook({
       title: title,
       author: author,
-      lines_attributes: obj
+      lines_attributes: obj,
+      summary: summaryText
     })
 
    }

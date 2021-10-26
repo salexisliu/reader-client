@@ -23,7 +23,7 @@ function BookForm({}) {
     console.log("FULL TEXT", bookText);
 
 
-    const summaryText = bookText.substring(0, 100)
+    const summaryText = bookText.substring(0, 385)
     console.log("SUMMARY", summaryText)
 
     const splitText = bookText.split(/\n/);
@@ -114,7 +114,7 @@ function BookForm({}) {
               multiline
               rows={12}
               label="Enter a title..."
-              value={bookText} //from name
+              value={bookText} 
               onChange={(e) => setBookText(e.target.value)}
             />
             <Button

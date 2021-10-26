@@ -13,7 +13,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 export default function Header({logOut}) {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar sx={{ backgroundColor: "#2a2a2a", height: '15px' }} position="static">
         <Toolbar>
           <IconButton
             size="large"
@@ -25,10 +25,10 @@ export default function Header({logOut}) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+
           </Typography>
-          <Button color="inherit" onClick={logOut}>Log Out</Button>
-          <Button color="inherit">Login</Button>
+          <Button color="primary" onClick={logOut}>Log Out</Button>
+
         </Toolbar>
       </AppBar>
     </Box>

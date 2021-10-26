@@ -1,5 +1,6 @@
 .App {
-  background-color: rgba(255,255,255, 0.95);
+  /* background-color: rgba(215, 215, 215, 0.495);  */
+  /* CONTAINER COLOR */
   width: 100%;
   margin: 0em auto;
   min-height: 100h;
@@ -7,13 +8,18 @@
   overflow: hidden;
   min-height: 100vh;
 }
+body {
+  /* background-color: #a7a4ae; */
+  /* background: linear-gradient(#dfcccc, #35355c); */
+
+}
 
 nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
   min-height: 10vh;
-  background: rgb(75, 96, 97);
+  background: rgb(43, 30, 30);
 }
 
 .navlink {

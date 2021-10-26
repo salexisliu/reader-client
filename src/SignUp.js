@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 function SignUp({}) {
   const [errorMessage, setErrorMessage] = useState("");
@@ -44,54 +45,64 @@ function SignUp({}) {
 
   return (
     <>
-      <Container>
+      <Container  >
         <>
           {created ? (
             <Redirect to="/login" />
           ) : (
             <div>
-              <div className="please-log-in">
+              <div>
                 <p>{errorMessage}</p>
               </div>
-
-              <Box
-                sx={{
-                  m: 1,
-                  width: "70ch",
-                }}
+              <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+                display="flex"
+                style={{ minHeight: "50vh" }}
+                padding={5}
               >
-                <h1>Form</h1>
-                <form onSubmit={createUser}>
-                  <>
-                    <TextField
-                      helperText="Please enter username"
-                      margin="normal"
-                      id="outlined-basic"
-                      label="username"
-                      variant="outlined"
-                      onChange={(e) => setUsername(e.target.value)}
-                    />
+                  <Box bgcolor="gray" >
+                  <h1>Form</h1>
+                  <form onSubmit={createUser}>
+                    <Grid padding={10} container spacing={3}>
+                      <Grid item xs={12}>
+                        <TextField
+                          helperText="Please enter username"
+                          margin="normal"
+                          id="outlined-basic"
+                          label="username"
+                          variant="outlined"
+                          onChange={(e) => setUsername(e.target.value)}
+                        />
+                      </Grid>
+                      <TextField
+                        margin="normal"
+                        helperText="Enter password"
+                        id="outlined-basic"
+                        label="password"
+                        variant="outlined"
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
 
-                    <TextField
-                      margin="normal"
-                      helperText="Enter password"
-                      id="outlined-basic"
-                      label="password"
-                      variant="outlined"
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
+                      <Button
+                        variant="outlined"
+                        size="large"
+                        color="primary"
+                        type="submit"
+                      >
+                        Submit
+                      </Button>
+                    </Grid>
+                  </form>
 
-                    <Button
-                      variant="outlined"
-                      size="large"
-                      color="primary"
-                      type="submit"
-                    >
-                      Submit
-                    </Button>
-                  </>
-                </form>
-              </Box>
+                  <Link to="/login">
+                    <Button>Log in</Button>
+                  </Link>
+                </Box>
+              </Grid>
             </div>
           )}
         </>

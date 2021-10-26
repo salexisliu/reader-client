@@ -7,7 +7,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 export default function App() {
   const history = useHistory();
   const [user, setUser] = useState({});
-  const [loggedIn, setLoggedIn] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [authChecked, setAuthChecked] = useState(false)
 
   function setCurrentUser(currentUser) {
     setUser(currentUser);
@@ -39,21 +40,25 @@ export default function App() {
         .then((user) => {
           setUser(user);
           setLoggedIn(true);
+          setAuthChecked(true)
         });
     } else {
       console.log("No token found, try logging in!");
+      setAuthChecked(true)
     }
   }, []);
 
+
+  if (!authChecked) { return <div></div> }
   return (
-    <div>
-      {loggedIn !== null && (
+    <div className = "bg">
+      {/* {loggedIn !== null && ( */}
         <Router>
           {loggedIn ? (
             <AuthenticatedApp loggedIn={loggedIn} logOut={logOut} user={user} />
           ) : (
             <>
-              <UnAuthenticatedApp
+              <UnAuthenticatedApp 
                 setUser={setUser}
                 loggedIn={loggedIn}
                 setLoggedIn={setLoggedIn}
@@ -61,7 +66,7 @@ export default function App() {
             </>
           )}
         </Router>
-     )}
+     {/* )} */}
     </div>
   );
 }

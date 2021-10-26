@@ -6,21 +6,25 @@ import BookForm from "./components/BookForm";
 import NavBar from "./NavBar";
 import Box from "@mui/material/Box";
 import NotesContainer from "./components/NotesContainer";
-
+import "./App.css";
 import Header from "./Header";
+
+import Homepage from "./Homepage";
 import VocabularyPage from "./components/VocabularyPage";
 
 function AuthenticatedApp({ logOut, loggedIn, user }) {
   return (
+
+
     <BrowserRouter>
       <div className="App">
         <Header logOut={logOut} />
         <Box sx={{ p: 2, m: 2, display: "flex" }}>
-          <nav>
+    
             <span>
               <NavBar logOut={logOut} />
             </span>
-          </nav>
+
           <Switch>
             <Route exact path="/read">
               <StoryContainer loggedIn={loggedIn} />
@@ -68,13 +72,14 @@ function AuthenticatedApp({ logOut, loggedIn, user }) {
 
 
             <Route exact path="/">
-              <h1>Homepage</h1><br></br>
+            <Homepage user={user}/>
               {/* <h1 className="greeting-text">Welcome back {user.username}!</h1> */}
             </Route>
           </Switch>
         </Box>
       </div>
-    </BrowserRouter>
+    </BrowserRouter> 
+
   );
 }
 

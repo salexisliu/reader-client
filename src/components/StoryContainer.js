@@ -5,7 +5,10 @@ import Container from "@mui/material/Container";
 import StoryLines from "./StoryLines.js";
 import Button from "@mui/material/Button";
 import Dictionary from "./Dictionary.js";
-
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import EditOffIcon from '@mui/icons-material/EditOff';
 //icons
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
@@ -225,6 +228,7 @@ function StoryContainer({ bookId }) {
     fetchLines();
   }, [pageNumber]);
 
+
   const showToolbar = () => {
     setToolbar(!toolbar);
   };
@@ -234,27 +238,33 @@ function StoryContainer({ bookId }) {
   }, []);
   return (
     <>
-      <Container>
-        <Box>
+      <Box  sx={{
+        width: 100,
+        height: 800,
+        marginLeft: "200px"}} position="fixed">
+        {toolbar ?<Button onClick={showToolbar}> <ModeEditIcon /></Button>: <Button onClick={showToolbar}> <EditOffIcon color="disabled" /></Button>  }
+          {soundOn ? <Button onClick={turnSoundOn}><VolumeUpIcon /></Button> :
+            <Button onClick={turnSoundOn}><VolumeOffIcon color="disabled" /></Button>}
+
+          {defineOn ? <Button onClick={turnDefineOn}><SpellcheckIcon /></Button> : <Button onClick={turnDefineOn}><SpellcheckIcon color="disabled" /></Button>}
+    
           {dictionary ? (
             <Dictionary
               lookUp={lookUp}
               setLookUp={setLookUp}
               closeDictionary={closeDictionary}
-              soundOn = {soundOn}
-              defineOn = {defineOn}
-              bookId = {bookId}
+              soundOn={soundOn}
+              defineOn={defineOn}
+              bookId={bookId}
             />
           ) : (
             <> </>
           )}{" "}
-          <Button onClick={showToolbar}> Show Toolbar</Button>
-          {soundOn ? <Button onClick={turnSoundOn}><VolumeUpIcon /></Button> : 
-            <Button onClick={turnSoundOn}><VolumeOffIcon color="disabled" /></Button> }
 
-          {defineOn ? <Button onClick={turnDefineOn}><SpellcheckIcon /></Button> : <Button onClick={turnDefineOn}><SpellcheckIcon color="disabled" /></Button>}
+     
         </Box>
-
+      <Container>
+      
         {lines
           .sort((a, b) => (a.id > b.id ? 1 : -1))
           .map((line, index) => {

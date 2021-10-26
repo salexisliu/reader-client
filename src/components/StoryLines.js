@@ -10,6 +10,7 @@ import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import NoteIndex from "./NoteIndex.js";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import LightModeIcon from '@mui/icons-material/LightMode';
 
 function StoryLines({
   setNoteChanged,
@@ -99,7 +100,7 @@ function StoryLines({
       {toolbar ? (
         <>
           <IconButton onClick={handleClick} size="small">
-            <BorderColorIcon />
+           <LightModeIcon/>
           </IconButton>
           <IconButton variant="outlined" onClick={handleClickOpen} size="small">
             <NoteAddIcon />
@@ -135,13 +136,13 @@ function StoryLines({
       <div style={{ display: "inline-flex" }}>
         {isHighlighted ? (
        
-          <Typography display="block" style={{ color: "orange" , "text-indent": "2em" }} variant="h5"  gutterBottom onMouseUp={(e) => getSelectionText(e)} key={lineObj.id}>
+          <Typography display="block" style={{ color: "orange" , "text-indent": "2em" }} variant="h6"  gutterBottom onMouseUp={(e) => getSelectionText(e)} key={lineObj.id}>
           
             {lineObj.content}
 
           </Typography>
         ) : (
-            <Typography display= "block" style={{ "text-indent": "2em"}} variant="h5" gutterBottom onMouseUp={(e) => getSelectionText(e)}  >
+            <Typography display= "block" style={{ "text-indent": "2em"}} variant="h6" gutterBottom onMouseUp={(e) => getSelectionText(e)}  >
         
             {lineObj.content}
             </Typography>

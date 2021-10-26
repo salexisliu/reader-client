@@ -17,11 +17,11 @@ function AuthenticatedApp() {
       <div className="App">
         <Box sx={{ p: 2, m: 2, display: 'flex' }}>
 
-          <nav>
+         
             <span>
               <NavBar />
             </span>
-          </nav>
+          
 
           <Switch>
             <Route exact path="/read">

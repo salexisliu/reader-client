@@ -7,10 +7,7 @@ function UnAuthenticatedApp({ setUser, loggedIn, setLoggedIn }) {
   console.log("NOT LOGGED IN")
   return (
 <>
-      <div className="please-log-in">
-     
-          <h3>Please log in below!</h3>
-        </div>
+   
     <Switch>
       <Route exact path="/">
         <Login setUser={setUser} setLoggedIn={setLoggedIn} />

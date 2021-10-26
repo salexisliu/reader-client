@@ -57,8 +57,8 @@ const headCells = [
   {
     id: 'term',
     numeric: false,
-    disablePadding: true,
-    label: 'term',
+    disablePadding: false,
+    label: 'Term',
   },
   {
     id: 'definition',
@@ -181,11 +181,7 @@ const EnhancedTableToolbar = (props ) => {
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Filter list">
-          <IconButton>
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
+       <></>
       )}
     </Toolbar>
   );
@@ -317,14 +313,14 @@ export default function EnhancedTable({ flashcards, deleteVocabWord}) {
                       </TableCell>
                     
                       <TableCell align="left">{row.definition}</TableCell>
-                      <TableCell align="left">{row.book_id}</TableCell>
+                      <TableCell align="left">{row.book.title}</TableCell>
                     </TableRow>
                   );
                 })}
               {emptyRows > 0 && (
                 <TableRow
                   style={{
-                    height: (dense ? 33 : 53) * emptyRows,
+                    height: 33 * emptyRows,
                   }}
                 >
                   <TableCell colSpan={6} />

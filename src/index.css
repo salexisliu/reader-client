@@ -7,6 +7,25 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.bg { 
+  /* CSS FOR UNAUTH APP */
+
+background: linear-gradient(#f7f7ef, #ebf3ff);
+ /* Full height */
+  height: 100%;
+  width: 100%;
+  margin: 0em auto;
+  min-height: 100h;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

@@ -14,7 +14,7 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import SpellcheckIcon from '@mui/icons-material/Spellcheck';
 
-function StoryContainer({ bookId }) {
+function StoryContainer({ bookId, user }) {
   // console.log("USEPARAMS", bookId);
 
   const [toolbar, setToolbar] = useState(false);
@@ -256,6 +256,7 @@ function StoryContainer({ bookId }) {
               soundOn={soundOn}
               defineOn={defineOn}
               bookId={bookId}
+              user = {user}
             />
           ) : (
             <> </>

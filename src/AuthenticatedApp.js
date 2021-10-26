@@ -27,7 +27,7 @@ function AuthenticatedApp({ logOut, loggedIn, user }) {
 
           <Switch>
             <Route exact path="/read">
-              <StoryContainer loggedIn={loggedIn} />
+              <StoryContainer loggedIn={loggedIn, user} />
             </Route>
 
             <Route path="/books">

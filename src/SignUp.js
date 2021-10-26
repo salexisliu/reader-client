@@ -7,7 +7,13 @@ import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import { Redirect, Link } from "react-router-dom";
-
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from "@mui/material/IconButton";
+import FormControl from '@mui/material/FormControl';
+import OutlinedInput from '@mui/material/OutlinedInput';
 function SignUp({}) {
   const [showPassword, setShowPassword] = useState(false)
   const [errorMessage, setErrorMessage] = useState("");
@@ -90,16 +96,27 @@ function SignUp({}) {
                         />
                       </Grid>
                       <Grid item>
-                        <TextField
-                          margin="normal"
-                          helperText="Enter password"
-                            id="outlined-password-input"
-                            label="Password"
-                          variant="outlined"
-                            type="password"
-                            autoComplete="current-password"
+                         <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                          <OutlinedInput
+                            id="outlined-adornment-password"
+                            type={showPassword ? 'text' : 'password'}
+                           
+                            value={password}
+                            endAdornment={
+                              <InputAdornment position="end">
+                                <IconButton
+                                  aria-label="toggle password visibility"
+                                  onClick={handleClickShowPassword}
+                                  // onMouseDown={handleMouseDownPassword}
+                                  edge="end"
+                                >
+                                  {showPassword ? <VisibilityOff /> : <Visibility/>}
+                                </IconButton>
+                              </InputAdornment>
+                            }
                           onChange={(e) => setPassword(e.target.value)}
                         />
+                          </FormControl>
                       </Grid>
                       <Button
                         variant="outlined"

@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 
 // import { SayButton } from 'react-say';
 import Card from "@mui/material/Card";
-function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, bookId}) {
+function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, bookId }) {
   const [wordsArray, setWordsArray] = useState([]);
   const [fontSize, setFontSize] = useState(0);
   const [definition, setDefinition] = useState("");
@@ -17,6 +17,7 @@ function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, boo
     let utterance = new SpeechSynthesisUtterance(word);
     synth.speak(utterance);
   };
+
 
   useEffect(() => {
     setDefinition("");
@@ -53,7 +54,7 @@ function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, boo
  
   }, [lookUp]);
 
-  console.log("These are the words", wordsArray);
+  console.log("These are the BOOK ID", );
 
   var synth = window.speechSynthesis;
   const clickSpeak = (word) => {
@@ -122,7 +123,9 @@ function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, boo
     return fetch("/flashcards", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
       body: JSON.stringify(obj),
     })

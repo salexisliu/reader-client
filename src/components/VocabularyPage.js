@@ -23,6 +23,7 @@ function VocabularyPage() {
       .then((data) => setVocab(data));
   };
 
+
   const deleteVocabWord = (words) => {
     console.log("STATE BEFORE", vocab)
     console.log(words);

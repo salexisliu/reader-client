@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import { Redirect, Link } from "react-router-dom";
 
 function SignUp({}) {
+  const [showPassword, setShowPassword] = useState(false)
   const [errorMessage, setErrorMessage] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -43,9 +46,13 @@ function SignUp({}) {
       );
   }
 
+  const handleClickShowPassword = () => {
+  setShowPassword(!showPassword)
+  };
+
   return (
     <>
-      <Container  >
+      <Container>
         <>
           {created ? (
             <Redirect to="/login" />
@@ -61,14 +68,18 @@ function SignUp({}) {
                 alignItems="center"
                 justify="center"
                 display="flex"
-                style={{ minHeight: "50vh" }}
+                style={{ minHeight: "40vh" }}
                 padding={5}
               >
-                  <Box bgcolor="gray" >
-                  <h1>Form</h1>
+                  <Paper variant="elevation" elevation={2} color="yellow" sx={{justifyContent: "center", 
+                  minHeight: "30vh", padding: "30px"}}>
                   <form onSubmit={createUser}>
-                    <Grid padding={10} container spacing={3}>
-                      <Grid item xs={12}>
+                    <Grid item>
+                      {" "}
+                        <Typography>Form</Typography>{" "}
+                    </Grid>
+                    <Grid container direction="column" padding={5} spacing={2}>
+                      <Grid item>
                         <TextField
                           helperText="Please enter username"
                           margin="normal"
@@ -78,15 +89,18 @@ function SignUp({}) {
                           onChange={(e) => setUsername(e.target.value)}
                         />
                       </Grid>
-                      <TextField
-                        margin="normal"
-                        helperText="Enter password"
-                        id="outlined-basic"
-                        label="password"
-                        variant="outlined"
-                        onChange={(e) => setPassword(e.target.value)}
-                      />
-
+                      <Grid item>
+                        <TextField
+                          margin="normal"
+                          helperText="Enter password"
+                            id="outlined-password-input"
+                            label="Password"
+                          variant="outlined"
+                            type="password"
+                            autoComplete="current-password"
+                          onChange={(e) => setPassword(e.target.value)}
+                        />
+                      </Grid>
                       <Button
                         variant="outlined"
                         size="large"
@@ -101,7 +115,7 @@ function SignUp({}) {
                   <Link to="/login">
                     <Button>Log in</Button>
                   </Link>
-                </Box>
+                </Paper>
               </Grid>
             </div>
           )}

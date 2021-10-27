@@ -24,7 +24,7 @@ function BookForm({}) {
     console.log("FULL TEXT", bookText);
 
 
-    const summaryText = bookText.substring(0, 505)
+    const summaryText = bookText.substring(0, 400)
     console.log("SUMMARY", summaryText)
 
     const splitText = bookText.split(/\n/);

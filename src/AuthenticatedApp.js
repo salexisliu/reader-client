@@ -38,11 +38,9 @@ function AuthenticatedApp({ logOut, loggedIn, user }) {
               <BookForm />
             </Route>
 
-
             <Route path="/flashcards">
               <VocabularyPage loggedIn={loggedIn}/>
             </Route>
-
 
             <Route
               exact
@@ -52,9 +50,6 @@ function AuthenticatedApp({ logOut, loggedIn, user }) {
               }}
             />
 
-          
-
-
             <Route
               exact
               path="/flashcards/:id"
@@ -62,8 +57,6 @@ function AuthenticatedApp({ logOut, loggedIn, user }) {
                 return <VocabularyPage loggedIn={loggedIn} bookId={match.params.id} />;
               }}
             />
-
-
 
             <Route exact path="/">
             <Homepage user={user}/>

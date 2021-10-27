@@ -11,6 +11,8 @@ import NoteIndex from "./NoteIndex.js";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import LightModeIcon from '@mui/icons-material/LightMode';
+import StickyNote2Icon from '@mui/icons-material/StickyNote2';
+import Tooltip from '@mui/material/Tooltip';
 
 function StoryLines({
   setNoteChanged,
@@ -31,7 +33,7 @@ function StoryLines({
   const [showNote, setShowNote] = useState(false);
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
- 
+
  
   const handleClickOpen = () => {
     setOpen(!open);
@@ -40,6 +42,14 @@ function StoryLines({
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleDeleteNote = (id) => {
+    setNote(false)
+    setOpen(false)
+    setShowNote(false)
+    setNoteChanged(true);
+    deleteNote(id)
+  }
 
   const handleAddNote = () => {
     setOpen(false);
@@ -69,6 +79,7 @@ function StoryLines({
   };
 
   useEffect(() => {
+    
     // console.log("lineObj", lineObj)
     checkIfHighlighted();
     checkNote();
@@ -136,7 +147,7 @@ function StoryLines({
       <div style={{ display: "inline-flex" }}>
         {isHighlighted ? (
        
-          <Typography display="block" style={{ color: "orange" , "text-indent": "2em" }} variant="h6"  gutterBottom onMouseUp={(e) => getSelectionText(e)} key={lineObj.id}>
+          <Typography className="highlight" display="block" style={{ "text-indent": "2em" }} variant="h6"  gutterBottom onMouseUp={(e) => getSelectionText(e)} key={lineObj.id}>
           
             {lineObj.content}
 
@@ -148,24 +159,24 @@ function StoryLines({
             </Typography>
         )}
   
-      {hasNote ? <Button onClick={toggleNote}>see note</Button> : <></>}
+        {hasNote ? <Button onClick={toggleNote}><Tooltip title="See note"><StickyNote2Icon sx={{ color: "#f7af9f"}} /></Tooltip></Button>: <></>}
 
       {showNote ? (
-        <h5 style={{ color: "red" }}>
+        <Typography>
           {lineObj.notes.map((note) => (
-            <NoteIndex deleteNote={deleteNote} note={note} />
+            <NoteIndex handleDeleteNote={handleDeleteNote} deleteNote={deleteNote} note={note} />
           ))}
-        </h5>
+        </Typography>
       ) : (
         <></>
       )}
 
       {noteChanged ? (
-        <h5 style={{ color: "red" }}>
+          <Typography>
           {lineObj.notes.map((note) => (
             <NoteIndex deleteNote={deleteNote} note={note} />
           ))}
-        </h5>
+            </Typography>
       ) : (
         <></>
       )}

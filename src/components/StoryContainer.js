@@ -13,7 +13,7 @@ import EditOffIcon from '@mui/icons-material/EditOff';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import SpellcheckIcon from '@mui/icons-material/Spellcheck';
-
+import Tooltip from '@mui/material/Tooltip';
 function StoryContainer({ bookId, user }) {
   // console.log("USEPARAMS", bookId);
 
@@ -35,6 +35,8 @@ function StoryContainer({ bookId, user }) {
   const [hasMore, setHasMore] = useState(false);
   const [loading, setLoading] = useState(true);
   const observer = useRef();
+
+  const [seeNoteButton, setSeeNoteButton] = useState(false);
 
   //id  of lines
   // console.log("OBSERVER", observer);
@@ -130,6 +132,8 @@ function StoryContainer({ bookId, user }) {
   };
 
   const deleteNote = (id) => {
+    setSeeNoteButton(!seeNoteButton)
+
     fetch(`http://localhost:4000/notes/${id}`, {
       method: "DELETE",
       headers: {
@@ -224,6 +228,7 @@ function StoryContainer({ bookId, user }) {
   }
 
   useEffect(() => {
+    localStorage.setItem("bookId", JSON.stringify(bookId))
     setLoading(true);
     fetchLines();
   }, [pageNumber]);
@@ -240,13 +245,14 @@ function StoryContainer({ bookId, user }) {
     <>
       <Box  sx={{
         width: 100,
-        height: 800,
+        height: 900,
         marginLeft: "200px"}} position="fixed">
-        {toolbar ?<Button onClick={showToolbar}> <ModeEditIcon /></Button>: <Button onClick={showToolbar}> <EditOffIcon color="disabled" /></Button>  }
-          {soundOn ? <Button onClick={turnSoundOn}><VolumeUpIcon /></Button> :
+        {toolbar ? <Button onClick={showToolbar}><ModeEditIcon sx={{ color: "#f7af9f" }}/></Button>: <Button onClick={showToolbar}> <EditOffIcon color="disabled" /></Button>  }
+
+          {soundOn ? <Button onClick={turnSoundOn}><VolumeUpIcon sx={{color: "#f7af9f"}} /></Button> :
             <Button onClick={turnSoundOn}><VolumeOffIcon color="disabled" /></Button>}
 
-          {defineOn ? <Button onClick={turnDefineOn}><SpellcheckIcon /></Button> : <Button onClick={turnDefineOn}><SpellcheckIcon color="disabled" /></Button>}
+        {defineOn ? <Button onClick={turnDefineOn}><SpellcheckIcon sx={{ color: "#f7af9f" }}/></Button> : <Button onClick={turnDefineOn}><SpellcheckIcon color="disabled" /></Button>}
     
           {dictionary ? (
             <Dictionary
@@ -287,6 +293,8 @@ function StoryContainer({ bookId, user }) {
                         deleteNote={deleteNote}
                         addLookUp={addLookUp}
                         getSelectionText={getSelectionText}
+                        seeNoteButton = {seeNoteButton}
+                        setSeeNoteButton = {setSeeNoteButton}
                       />
                     </div>
                   ) : (
@@ -304,6 +312,8 @@ function StoryContainer({ bookId, user }) {
                         deleteNote={deleteNote}
                         addLookUp={addLookUp}
                         getSelectionText={getSelectionText}
+                          seeNoteButton={seeNoteButton}
+                          setSeeNoteButton={setSeeNoteButton}
                       />
                     </div>
                   )}
@@ -325,6 +335,8 @@ function StoryContainer({ bookId, user }) {
                     deleteNote={deleteNote}
                     addLookUp={addLookUp}
                     getSelectionText={getSelectionText}
+                    seeNoteButton={seeNoteButton}
+                    setSeeNoteButton={setSeeNoteButton}
                   />
                 </div>
               ) : (
@@ -343,6 +355,8 @@ function StoryContainer({ bookId, user }) {
                     deleteNote={deleteNote}
                     addLookUp={addLookUp}
                     getSelectionText={getSelectionText}
+                      seeNoteButton={seeNoteButton}
+                      setSeeNoteButton={setSeeNoteButton}
                   />
                 </div>
               );

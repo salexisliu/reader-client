@@ -18,7 +18,7 @@ import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
-function Login({ setUser, loggedIn, setLoggedIn, bg }) {
+function Login({ setUser, loggedIn, setLoggedIn, bg}) {
   const [formErrors, setFormErrors] = useState([]);
   const [errorMessage, setErrorMessage] = useState(false);
   const [username, setUsername] = useState([]);
@@ -79,6 +79,7 @@ function Login({ setUser, loggedIn, setLoggedIn, bg }) {
   }
 
 console.log("BG", bg)
+
   // setFormErrors(errors.error)});
 
   return (
@@ -89,9 +90,13 @@ console.log("BG", bg)
           <AuthenticatedApp/>
         ) : (
             <div>
-              <Typography sx={{ color: "#DEDEDE", wordSpacing: "2px", letterSpacing: "1px", lineHeight: 1.7, maxHeight: 100, fontSize: 25, fontWeight: 'medium' }}>
+              <Typography sx={{ color: "white", wordSpacing: "2px", letterSpacing: "2px", lineHeight: 1.7, maxHeight: 100, fontSize: 20, fontWeight: 'medium' }}>
             {shuffle(bg).map(b => b.summary)
-               }
+               } 
+
+
+             
+               {/* THIS IS RERENDERING EVEY TIME USER TYPES -- SHUFFLE AND SET STATE BEFORE */}
               </Typography>
               <Grid
                 container

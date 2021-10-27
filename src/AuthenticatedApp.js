@@ -5,7 +5,7 @@ import BookContainer from "./components/BookContainer";
 import BookForm from "./components/BookForm";
 import NavBar from "./NavBar";
 import Box from "@mui/material/Box";
-import NotesContainer from "./components/NotesContainer";
+
 import "./App.css";
 import Header from "./Header";
 
@@ -52,13 +52,7 @@ function AuthenticatedApp({ logOut, loggedIn, user }) {
               }}
             />
 
-            <Route
-              exact
-              path="/notes/:id"
-              render={({ match }) => {
-                return <NotesContainer loggedIn={loggedIn} bookId={match.params.id} />;
-              }}
-            />
+          
 
 
             <Route

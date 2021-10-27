@@ -12,6 +12,8 @@ import Tooltip from '@mui/material/Tooltip';
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import NoteIcon from '@mui/icons-material/Note';
+import EditIcon from '@mui/icons-material/Edit';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 function BookCard({book, deleteBook, updateBook}) {
 
@@ -61,8 +63,18 @@ setClickedUpdate(!clickedUpdate)
     <>
       <Grid
         item
-        xs={3}>
-        <Card sx={{ minWidth: 200}}>
+        xs={4}>
+          
+        <Card onClick={clickedAction} sx={{ minWidth: 200, minHeight:250, padding: "5px"}}>
+          <Tooltip title="Delete Text">
+
+            <IconButton sx={{ float: 'right', backgroundColor: 'transparent' }} onClick={(e) => deleteBook(book.id, e)}><HighlightOffIcon /></IconButton>
+          </Tooltip>
+          <Typography gutterBottom sx={{ color: "#DEDEDE", wordSpacing: "1px", letterSpacing: "1px", lineHeight: 1.7, maxHeight: 100, fontSize: 12, fontWeight: 'medium' }} align="justify" variant="body2" color="text.secondary">
+            {book.summary}
+          </Typography>
+         
+
         <CardActionArea onClick={clickedAction}> 
           {/* <CardMedia
             component="img"
@@ -71,9 +83,7 @@ setClickedUpdate(!clickedUpdate)
             alt="book cover"
           /> */}
             <CardContent>
-              <Typography gutterBottom sx={{ color: "#DEDEDE", wordSpacing: "1.25px", letterSpacing: "1px", lineHeight: 1.7, maxHeight: 100, fontSize: 13, fontWeight: 'medium' }} align="justify" variant="body2" color="text.secondary">
-                {book.summary}
-              </Typography>
+            
               <Typography gutterBottom variant="h6" component="div">
              <span>
                   {clickedUpdate ? 
@@ -87,7 +97,7 @@ setClickedUpdate(!clickedUpdate)
                   /></form>
                   : <> {book.title} </> }
                 <Button size="small" color="primary">
-                  <Button onClick={(e) => handleUpdateClick(e, book.id)}><NoteIcon /></Button>
+                    <Button onClick={(e) => handleUpdateClick(e, book.id)}><EditIcon sx={{ color: "#f7af9f"}} fontSize="small"/></Button>
                 </Button></span>
             </Typography>
               <Typography  variant="body2" color="text.secondary">
@@ -97,17 +107,16 @@ setClickedUpdate(!clickedUpdate)
             
           </CardContent>
         </CardActionArea>
-          <CardActions >
+          <CardActions disableSpacing>
 
-            <Tooltip title="See Notes">
+            {/* <Tooltip title="See Notes">
           <Button size="small" color="primary">
               <Button onClick={() => handleNotesClick(book.id)}><NoteIcon /></Button>
           </Button>
-          </Tooltip>
-            <Tooltip title="Delete Text">
-            <Button onClick={() => deleteBook(book.id)}><DeleteIcon /></Button>
-            </Tooltip>
+          </Tooltip> */}
+         
        
+          
        
         </CardActions>
       </Card>

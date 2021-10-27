@@ -96,7 +96,7 @@ function SignUp({ setUser, bg}) {
           ) : (
             <div>
                
-                <Typography sx={{ color: "#DEDEDE", wordSpacing: "2px", letterSpacing: "1px", lineHeight: 1.7, maxHeight: 100, fontSize: 25, fontWeight: 'medium' }}>
+                <Typography sx={{ color: "#DEDEDE", wordSpacing: "2px", letterSpacing: "1px", lineHeight: 1.7, maxHeight: 100, fontSize: 20, fontWeight: 'medium' }}>
                   {shuffle(bg).map(b => b.summary)
                   }
                 </Typography>

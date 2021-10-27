@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { ConstructionOutlined } from "@mui/icons-material";
+import Typography from "@mui/material/Typography"
 
 function BookForm({}) {
   const [bookText, setBookText] = useState("");
@@ -23,7 +24,7 @@ function BookForm({}) {
     console.log("FULL TEXT", bookText);
 
 
-    const summaryText = bookText.substring(0, 385)
+    const summaryText = bookText.substring(0, 505)
     console.log("SUMMARY", summaryText)
 
     const splitText = bookText.split(/\n/);
@@ -85,7 +86,7 @@ function BookForm({}) {
             width: "70ch",
           }}
         >
-          <h1>Form</h1>
+          <Typography>Upload </Typography>
           <form onSubmit={handleSubmitText}>
             <>
           <TextField

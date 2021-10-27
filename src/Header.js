@@ -13,7 +13,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 export default function Header({logOut}) {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar sx={{ backgroundColor: "#2a2a2a", height: '15px' }} position="static">
+      <AppBar variant="elevation" elevation={0} sx={{ backgroundColor: "#f7af9f", height: '10px' }} position="static">
         <Toolbar>
           <IconButton
             size="large"

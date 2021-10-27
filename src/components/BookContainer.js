@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import BookCard from "./BookCard.js";
 import BookContainerSearch from "./BookContainerSearch.js";
-import { BookmarkSharp } from "@mui/icons-material";
+
 
 function BookContainer(loggedIn) {
   const [books, setBooks] = useState([]);
@@ -27,7 +27,8 @@ function BookContainer(loggedIn) {
       .then((books) => setBooks(books));
   };
 
-  const deleteBook = (id) => {
+  const deleteBook = (id, e) => {
+    e.stopPropagation();
     fetch(`books/${id}`, {
       method: "DELETE",
       headers: 

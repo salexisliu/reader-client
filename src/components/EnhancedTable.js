@@ -153,16 +153,7 @@ const EnhancedTableToolbar = (props ) => {
         }),
       }}
     >
-      {numSelected > 0 ? (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          color="inherit"
-          variant="subtitle1"
-          component="div"
-        >
-          {numSelected} selected
-        </Typography>
-      ) : (
+      
         <Typography
           sx={{ flex: '1 1 100%' }}
           variant="h6"
@@ -172,7 +163,7 @@ const EnhancedTableToolbar = (props ) => {
           Vocabulary
           <Typography variant="body2"> Explore the words you've interacted with</Typography>
         </Typography>
-      )}
+    
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">

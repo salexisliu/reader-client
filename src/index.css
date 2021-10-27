@@ -10,7 +10,8 @@ body {
 .bg { 
   /* CSS FOR UNAUTH APP */
 
-background: linear-gradient(#f7f7ef, #ebf3ff);
+/* background: linear-gradient(rgb(51, 51, 51), #e4e4e4); */
+background-color: rgb(240, 240, 240);
  /* Full height */
   height: 100%;
   width: 100%;

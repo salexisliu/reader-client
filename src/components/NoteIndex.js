@@ -3,12 +3,12 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-function NoteIndex({ note, deleteNote }) {
+function NoteIndex({ note, handleDeleteNote, deleteNote }) {
   return (
     <>
       <Grid>
         <IconButton
-          onClick={() => deleteNote(note.id)}
+          onClick={() => handleDeleteNote(note.id)}
           aria-label="delete"
           size="small"
         >

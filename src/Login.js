@@ -71,8 +71,8 @@ function Login({ setUser, loggedIn, setLoggedIn, bg, loginBGText}) {
           // <Redirect to="/" />
           <AuthenticatedApp/>
         ) : (
-            <div>
-              <Typography sx={{ color: "white", wordSpacing: "2px", letterSpacing: "2px", lineHeight: 1.7, maxHeight: 100, fontSize: 20, fontWeight: 'medium' }}>
+            <div >
+              <Typography sx={{ color: "#CECECE", wordSpacing: "2px", letterSpacing: "1px", lineHeight: 1.7, maxHeight: 100, fontSize: 20, fontWeight: 'medium' }}>
                 {loginBGText.map(b => b.summary)
                } 
 
@@ -95,11 +95,13 @@ function Login({ setUser, loggedIn, setLoggedIn, bg, loginBGText}) {
                   justifyContent: "center",
                   minHeight: "30vh", padding: "30px", backgroundColor: "white", opacity: .8
                 }}>
+                  <Typography textAlign="center" variant="h2">reader</Typography>
                   <form onSubmit={handleLogin}>
                
                     <Grid container direction="column" padding={5} spacing={2}>
                       <Grid item>
                         {" "}
+                      {" "}
                         <Typography>Log In</Typography>{" "}
                         {formErrors.length > 0 ? (
                           <p key={formErrors} style={{ color: "red" }}>

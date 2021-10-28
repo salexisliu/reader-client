@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import Grid from "@mui/material/Grid";
+
 import Container from "@mui/material/Container";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
+
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { ConstructionOutlined } from "@mui/icons-material";
+
 import Typography from "@mui/material/Typography"
+import { Redirect, useHistory, Link } from "react-router-dom";
 
 function BookForm({}) {
   const [bookText, setBookText] = useState("");
@@ -15,7 +15,7 @@ function BookForm({}) {
   const [author, setAuthor] = useState("");
   const [formErrors, setFormErrors] = useState([]);
   const [linesAttributes, setLinesAttributes] = useState([])
-
+  const history = useHistory();
   const handleSubmitText = (e) => {
     setFormErrors([]);
     e.preventDefault();
@@ -65,7 +65,7 @@ function BookForm({}) {
       .then((r) => (r.json()))
       .then((text) => {
         console.log("fnished", text);
-
+        history.push("/books")
         //  setBookText(bookText.concat(text))
       });
   };

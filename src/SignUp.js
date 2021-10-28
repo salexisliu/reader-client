@@ -79,7 +79,7 @@ function SignUp({ setUser, bg, signup, backgroundText}) {
           ) : (
             <div>
                
-                <Typography sx={{ color: "#DEDEDE", wordSpacing: "2px", letterSpacing: "1px", lineHeight: 1.7, maxHeight: 100, fontSize: 20, fontWeight: 'medium' }}>
+                <Typography sx={{ color: "#CECECE", wordSpacing: "2px", letterSpacing: "1px", lineHeight: 1.7, maxHeight: 100, fontSize: 20, fontWeight: 'medium' }}>
                   {
                     signup.map(b => b.summary)
                   }
@@ -99,7 +99,8 @@ function SignUp({ setUser, bg, signup, backgroundText}) {
                     position: "absolute",
                     marginTop: "-95px",
                justifyContent: "center",
-                    minHeight: "30vh", padding: "30px", backgroundColor:"white", opacity: .8}}>
+                    minHeight: "30vh", padding: "30px", backgroundColor:"#D3D3D3", opacity: .8}}>
+                    <Typography textAlign="center" variant="h2">reader</Typography>
                   <form onSubmit={createUser}>
                    
                     <Grid container direction="column" padding={5} spacing={2}>

@@ -63,7 +63,7 @@ function NavBar({ logOut }) {
         variant="permanent"
         anchor="left"
       >
-        <Typography variant="h6" align="left" padding= "20px" > READER</Typography>
+        <Typography variant="h4" align="center" fontWeight= 'light' padding= "20px" > reader</Typography>
         <Divider />
         <Toolbar />
         

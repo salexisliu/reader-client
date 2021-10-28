@@ -144,7 +144,7 @@ function BookContainer(loggedIn) {
         <Button onClick={sortByTitle}> Title </Button>
         <Button onClick={sortByAuthor}> Author </Button>
         <Button onClick={sortByNewest}> Newest First </Button>
-        <Button onClick={sortByDateCreated}> Date Created </Button>
+        <Button onClick={sortByDateCreated}> Oldest First </Button>
         <BookContainerSearch
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}

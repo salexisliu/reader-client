@@ -118,7 +118,7 @@ function SignUp({ setUser, bg, signup, backgroundText}) {
                             error
                               margin="normal"
                               id="outlined-basic"
-                              label="username"
+                           
                               variant="outlined"
                               InputProps={{
                                 startAdornment: <InputAdornment position="end"><AccountCircle /></InputAdornment>,
@@ -128,7 +128,7 @@ function SignUp({ setUser, bg, signup, backgroundText}) {
 
                               margin="normal"
                               id="outlined-basic"
-                              label="username"
+                          
                               variant="outlined"
                               InputProps={{
                                 startAdornment: <InputAdornment position="end"><AccountCircle /></InputAdornment>,

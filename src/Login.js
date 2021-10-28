@@ -76,8 +76,6 @@ function Login({ setUser, loggedIn, setLoggedIn, bg, loginBGText}) {
                 {loginBGText.map(b => b.summary)
                } 
 
-
-             
                {/* THIS IS RERENDERING EVEY TIME USER TYPES -- SHUFFLE AND SET STATE BEFORE */}
               </Typography>
               <Grid
@@ -114,7 +112,8 @@ function Login({ setUser, loggedIn, setLoggedIn, bg, loginBGText}) {
                             error
                             margin="normal"
                             id="outlined-basic"
-                            label="username"
+                               
+                            defaultValue="Hello World"
                             variant="outlined"
                             InputProps={{
                               startAdornment: <InputAdornment position="end"><AccountCircle /></InputAdornment>,
@@ -124,7 +123,7 @@ function Login({ setUser, loggedIn, setLoggedIn, bg, loginBGText}) {
 
                             margin="normal"
                             id="outlined-basic"
-                            label="username"
+                           
                             variant="outlined"
                             InputProps={{
                               startAdornment: <InputAdornment position="end"><AccountCircle /></InputAdornment>,

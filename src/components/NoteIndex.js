@@ -12,7 +12,7 @@ function NoteIndex({ note, handleDeleteNote, deleteNote }) {
           aria-label="delete"
           size="small"
         >
-          <DeleteIcon fontSize="inherit" />
+          <DeleteIcon className={"buttonCSS"} fontSize="inherit" />
         </IconButton>
 
         {note.content}

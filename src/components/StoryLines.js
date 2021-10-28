@@ -111,10 +111,10 @@ function StoryLines({
       {toolbar ? (
         <>
           <IconButton onClick={handleClick} size="small">
-           <LightModeIcon/>
+           <LightModeIcon　className={"buttonCSS"}/>
           </IconButton>
           <IconButton variant="outlined" onClick={handleClickOpen} size="small">
-            <NoteAddIcon />
+            <NoteAddIcon className={"buttonCSS"} />
           </IconButton>{" "}
         </>
       ) : (
@@ -147,7 +147,7 @@ function StoryLines({
       <div style={{ display: "inline-flex" }}>
         {isHighlighted ? (
        
-          <Typography className="highlight" display="block" style={{ "text-indent": "2em" }} variant="h6"  gutterBottom onMouseUp={(e) => getSelectionText(e)} key={lineObj.id}>
+          <Typography className="highlight" display="block" style={{ "text-indent": "2em", color: "#5d4842" }} variant="h6"  gutterBottom onMouseUp={(e) => getSelectionText(e)} key={lineObj.id}>
           
             {lineObj.content}
 
@@ -159,7 +159,7 @@ function StoryLines({
             </Typography>
         )}
   
-        {hasNote ? <Button onClick={toggleNote}><Tooltip title="See note"><StickyNote2Icon sx={{ color: "#f7af9f"}} /></Tooltip></Button>: <></>}
+        {hasNote ? <Button onClick={toggleNote}><Tooltip title="See note"><StickyNote2Icon sx={{color: "gray"}} className={"buttonCSS"} /></Tooltip></Button>: <></>}
 
       {showNote ? (
         <Typography>

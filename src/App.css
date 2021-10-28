@@ -79,3 +79,7 @@ padding: 4px;
   padding: 10px;
  align-items: "center";
 }
+
+.buttonCSS:hover {
+  color: #f7af9f !important;
+}

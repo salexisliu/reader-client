@@ -68,7 +68,7 @@ setClickedUpdate(!clickedUpdate)
         <Card onClick={clickedAction} sx={{ minWidth: 200, minHeight:250, padding: "5px"}}>
           <Tooltip title="Delete Text">
 
-            <IconButton sx={{ float: 'right', backgroundColor: 'transparent' }} onClick={(e) => deleteBook(book.id, e)}><HighlightOffIcon /></IconButton>
+            <IconButton sx={{ float: 'right', color: "#333333", backgroundColor: 'transparent' }} onClick={(e) => deleteBook(book.id, e)}><HighlightOffIcon className={"buttonCSS"}/></IconButton>
           </Tooltip>
           <Typography gutterBottom sx={{ color: "#DEDEDE", wordSpacing: "1px", letterSpacing: "1px", lineHeight: 1.7, maxHeight: 100, fontSize: 12, fontWeight: 'medium' }} align="justify" variant="body2" color="text.secondary">
             {book.summary}
@@ -96,9 +96,11 @@ setClickedUpdate(!clickedUpdate)
                     type="text"
                   /></form>
                   : <> {book.title} </> }
-                <Button size="small" color="primary">
-                    <Button onClick={(e) => handleUpdateClick(e, book.id)}><EditIcon sx={{ color: "#f7af9f"}} fontSize="small"/></Button>
-                </Button></span>
+                  <Tooltip title="Edit Title">
+
+                  <IconButton onClick={(e) => handleUpdateClick(e, book.id)}><EditIcon className={"buttonCSS"} sx={{ color: "#333333"}} fontSize="small"/></IconButton>
+              </Tooltip>
+               </span>
             </Typography>
               <Typography  variant="body2" color="text.secondary">
               {book.author}

@@ -245,6 +245,7 @@ function StoryContainer({ bookId, user }) {
     <>
       <Box  sx={{
         width: 100,
+        top: 80,
         height: 900,
         marginLeft: "200px"}} position="fixed">
         {toolbar ? <Button onClick={showToolbar}><ModeEditIcon sx={{ color: "#f7af9f" }}/></Button>: <Button onClick={showToolbar}> <EditOffIcon color="disabled" /></Button>  }

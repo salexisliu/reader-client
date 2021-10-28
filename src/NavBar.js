@@ -63,8 +63,11 @@ function NavBar({ logOut }) {
         variant="permanent"
         anchor="left"
       >
-        <Toolbar />
+        <Typography variant="h6" align="left" padding= "20px" > READER</Typography>
         <Divider />
+        <Toolbar />
+        
+      
 
         <List sx={{padding: "5px"}}>
    

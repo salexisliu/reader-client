@@ -11,7 +11,9 @@ function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, boo
   const [wordsArray, setWordsArray] = useState([]);
   const [fontSize, setFontSize] = useState(0);
   const [definition, setDefinition] = useState("");
+  const [term, setTerm] = useState("");
   const [word, setWord] = useState("");
+  const [def, setDef] = useState("")
 
   const speak = (word) => {
     let utterance = new SpeechSynthesisUtterance(word);
@@ -64,13 +66,14 @@ function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, boo
   };
 
   const handleSpeakClick = () => {
-    speak(lookUp);
+    speak(definition);
   };
   const handleSpeakCancel = () => {
     synth.cancel();
   };
 
   const handleDefine = (e) => {
+   
     setDefinition("");
     console.log("clicked", e.target.textContent);
     const clickedWord = e.target.textContent.toLowerCase();
@@ -93,19 +96,32 @@ function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, boo
   };
 
   const fetchDef = (word) => {
+    setTerm(word)
     fetch(
       `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=b033b3b4-4766-4db1-8f40-6af316839bf5`
     )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data[0].shortdef[0]);
-        setDefinition(data[0].shortdef[0]);
-        if (word !== "") {
+      .then((res) => {
+        if (res.ok) { 
+          res.json().then((data) => {
+        console.log("DIC DEF", data);
+        // setDefinition(data);
+        if (typeof data[0] === 'string') {
+              setDefinition("Definition not found!")
+            } else if 
+           (data[0].shortdef[0]) {
+          setDefinition((data[0].shortdef[0]))
+      
+            } else {
+          setDefinition((data[0].meta.stems[0]))
+            }
+            if (typeof data[0] !== 'string') {
           createFlashcard(word, data[0].shortdef[0]);
         } else {
-          return null;
+          console.log("FC NOT  MADE, no word", word);
         }
-      });
+      })
+    }
+  });
   };
 
   const createFlashcard = (word, def) => {
@@ -147,9 +163,9 @@ function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, boo
         <>
           <Container
             sx={{
-              mt: "40px",
-              width: "550px",
-
+              mt: "315px",
+              width: "525px",
+              borderRadius: 3,
               backgroundColor: "palette.secondary.light",
               opacity: [0.8, 1, 0.9],
               "&:hover": {
@@ -159,40 +175,38 @@ function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, boo
             }}
             style={{
               position: "fixed",
+              left: "610px",
               background: "#222222",
               color: "#ffffe0",
-              padding: "10px",
+              padding: "5px",
             }}
           >
             <Container
               sx={{
-                m: 2,
+                m: 1,
               }}
             >
               <Button onClick={() => handleSpeakClick()}>Speak</Button>
-              <Button onClick={() => handleSpeakCancel()}>Cancel</Button>
+              <Button onClick={() => handleSpeakCancel()}>Stop</Button>
               <Button onClick={() => closeDictionary()}>
                 Close Dictionary
               </Button>
-              <Box
-                display="flex"
-                sx={{
-                  m: 2,
-                }}
-              >
+         
                 <Container display="flex" alignItems="flex-start">
-                  <Box sx={{ fontSize: fontSize }}>
-                    <span key={word} onClick={(e) => handleDefine(e)}>
+                
+                    {/* <span key={word} onClick={(e) => handleDefine(e)}>
                       {word}{" "}
-                    </span>
+                    </span> */}
 
-                    <Box sx={{ fontSize: 20, color: "light-yellow" }}>
-                      <b>Definition: </b>
-                      {definition}
+                    <Box sx={{ fontSize: 16, color: "light-yellow" }}>
+                  <Typography variant="h6"> {term}</Typography>
+                    
+                      <Typography variant="h8"> <b>Definition: </b>    {definition}</Typography>
+              
                     </Box>
-                  </Box>
+           
                 </Container>
-              </Box>
+            
             </Container>
           </Container>
         </>

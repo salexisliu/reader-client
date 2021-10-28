@@ -37,7 +37,7 @@ export default function Homepage({ user }) {
   } else if (curHr < 18) {
     greeting = "Good afternoon";
   } else {
-    greeting = "good evening";
+    greeting = "Good evening";
   }
 
   useEffect(() => {
@@ -96,6 +96,7 @@ export default function Homepage({ user }) {
         justify="left"
         style={{ minHeight: "100vh" }}
       >
+
         <Typography className="homepage" variant="h3">
           {" "}
           {greeting}, {user.username}!
@@ -135,8 +136,8 @@ export default function Homepage({ user }) {
                       wordSpacing: "1px",
                       letterSpacing: "1px",
                       lineHeight: 1.7,
-                      maxHeight: 100,
-                      fontSize: 12,
+                      maxHeight: 150,
+                      fontSize: 14,
                       fontWeight: "medium",
                     }}
                     align="justify"
@@ -159,7 +160,7 @@ export default function Homepage({ user }) {
                       </Typography>
                     </CardContent>
                   </CardActionArea>
-                  <CardActions disableSpacing></CardActions>
+             
                 </Card>
               </Box>
             </>

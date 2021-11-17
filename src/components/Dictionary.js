@@ -163,8 +163,8 @@ function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, boo
         <>
           <Container
             sx={{
-              mt: "315px",
-              width: "525px",
+              mt: "275px",
+              width: "550px",
               borderRadius: 3,
               backgroundColor: "palette.secondary.light",
               opacity: [0.8, 1, 0.9],
@@ -183,7 +183,7 @@ function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, boo
           >
             <Container
               sx={{
-                m: 1,
+                m: .5,
               }}
             >
               <Button onClick={() => handleSpeakClick()}>Speak</Button>

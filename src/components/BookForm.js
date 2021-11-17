@@ -114,7 +114,7 @@ function BookForm({}) {
               margin="normal"
               multiline
               rows={12}
-              label="Enter a title..."
+              label="Enter text..."
               value={bookText} 
               onChange={(e) => setBookText(e.target.value)}
             />

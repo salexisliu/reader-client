@@ -65,7 +65,7 @@ setClickedUpdate(!clickedUpdate)
         item
         xs={4}>
           
-        <Card onClick={clickedAction} sx={{ minWidth: 200, minHeight:250, padding: "5px"}}>
+        <Card onClick={clickedAction} sx={{ minWidth: 200, maxHeight: 260, minHeight:260, padding: "5px"}}>
           <Tooltip title="Delete Text">
 
             <IconButton sx={{ float: 'right', color: "#333333", backgroundColor: 'transparent' }} onClick={(e) => deleteBook(book.id, e)}><HighlightOffIcon className={"buttonCSS"}/></IconButton>

@@ -42,7 +42,6 @@ export default function App() {
 
   useEffect(() => {
   
-   
     const token = localStorage.token;
     if (
       typeof token !== "undefined" &&

@@ -4,9 +4,8 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-
-// import { SayButton } from 'react-say';
 import Card from "@mui/material/Card";
+
 function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, bookId }) {
   const [wordsArray, setWordsArray] = useState([]);
   const [fontSize, setFontSize] = useState(0);
@@ -56,8 +55,6 @@ function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, boo
  
   }, [lookUp]);
 
-  console.log("These are the BOOK ID", );
-
   var synth = window.speechSynthesis;
   const clickSpeak = (word) => {
     let utterance = new SpeechSynthesisUtterance(word);
@@ -103,21 +100,24 @@ function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, boo
       .then((res) => {
         if (res.ok) { 
           res.json().then((data) => {
-        console.log("DIC DEF", data);
+        console.log("DIC DEF", data[0]);
         // setDefinition(data);
+
+      
         if (typeof data[0] === 'string') {
               setDefinition("Definition not found!")
-            } else if 
+        } else if (data[0] === undefined) {
+            setDefinition("Definition not found!")
+          } else if
            (data[0].shortdef[0]) {
           setDefinition((data[0].shortdef[0]))
-      
             } else {
           setDefinition((data[0].meta.stems[0]))
             }
-            if (typeof data[0] !== 'string') {
+            if (typeof data[0] !== 'string' && data[0]) {
           createFlashcard(word, data[0].shortdef[0]);
         } else {
-          console.log("FC NOT  MADE, no word", word);
+          console.log("FC NOT MADE, no word", word);
         }
       })
     }

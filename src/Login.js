@@ -72,11 +72,11 @@ function Login({ setUser, loggedIn, setLoggedIn, bg, loginBGText}) {
           <AuthenticatedApp/>
         ) : (
             <div >
-              <Typography sx={{ color: "#CECECE", wordSpacing: "2px", letterSpacing: "1px", lineHeight: 1.7, maxHeight: 100, fontSize: 20, fontWeight: 'medium' }}>
+              <Typography sx={{ color: "#CECECE", wordSpacing: "2px", letterSpacing: "1px", lineHeight: 3, minWidth: 500, maxHeight: 100, fontSize: 20, fontWeight: 'medium' }}>
                 {loginBGText.map(b => b.summary)
                } 
 
-               {/* THIS IS RERENDERING EVEY TIME USER TYPES -- SHUFFLE AND SET STATE BEFORE */}
+             
               </Typography>
               <Grid
                 container
@@ -86,7 +86,7 @@ function Login({ setUser, loggedIn, setLoggedIn, bg, loginBGText}) {
                 justify="center"
                 display="flex"
                 style={{ minHeight: "50vh" }}
-                padding={5}
+                padding={25}
               >
 
                 <Paper variant="elevation" elevation={4} sx={{

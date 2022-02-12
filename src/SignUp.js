@@ -78,8 +78,7 @@ function SignUp({ setUser, bg, signup, backgroundText}) {
             <Redirect to="/login" />
           ) : (
             <div>
-               
-                <Typography sx={{ color: "#CECECE", wordSpacing: "2px", letterSpacing: "1px", lineHeight: 1.7, maxHeight: 100, fontSize: 20, fontWeight: 'medium' }}>
+                <Typography sx={{ color: "#CECECE", wordSpacing: "2px", letterSpacing: "1px", lineHeight: 3, minWidth: 500, maxHeight: 100, fontSize: 20, fontWeight: 'medium' }}>
                   {
                     signup.map(b => b.summary)
                   }
@@ -92,7 +91,7 @@ function SignUp({ setUser, bg, signup, backgroundText}) {
                 justify="center"
                 display="flex"
                 style={{ minHeight: "50vh" }}
-                padding={5}
+                padding={25}
               >
                 
                   <Paper variant="elevation" elevation={4} sx={{

@@ -7,12 +7,10 @@ import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 
 function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, bookId }) {
-  const [wordsArray, setWordsArray] = useState([]);
-  const [fontSize, setFontSize] = useState(0);
+
   const [definition, setDefinition] = useState("");
   const [term, setTerm] = useState("");
   const [word, setWord] = useState("");
-  const [def, setDef] = useState("")
 
   const speak = (word) => {
     let utterance = new SpeechSynthesisUtterance(word);
@@ -35,23 +33,10 @@ function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, boo
       soundOn ? speak(result) : console.log(result);
     } else {
       console.log("CLICKWORD TO STRING", clickedWord);
-      const punctuation = [",", ".", "?", ";", "/", " ", "—", "_"];
-
-      // clickedWord.map((letter) => {
-      //   if (punctuation.includes(letter)) {
-      //     return letter;
-      //   } else {
-      //     return null;
-      //   }
-      // }
-
-      // let newWord = clickedWord.replace(letter, "")
-
+   
       fetchDef(clickedWord.toLowerCase());
       soundOn ? speak(clickedWord) :  console.log(clickedWord);
     }
-
-    // console.log("NEW WORD", newWord)
  
   }, [lookUp]);
 
@@ -193,12 +178,8 @@ function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, boo
               </Button>
          
                 <Container display="flex" alignItems="flex-start">
-                
-                    {/* <span key={word} onClick={(e) => handleDefine(e)}>
-                      {word}{" "}
-                    </span> */}
-
-                    <Box sx={{ fontSize: 16, color: "light-yellow" }}>
+        
+                  <Box sx={{ fontSize: 16, color: "light-yellow" }}>
                   <Typography variant="h6"> {term}</Typography>
                     
                       <Typography variant="h8"> <b>Definition: </b>    {definition}</Typography>

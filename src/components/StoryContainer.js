@@ -76,7 +76,7 @@ function StoryContainer({ bookId, user }) {
   const fetchLines = () => {
     fetch(`http://localhost:3000/linebybook/${bookId}?page=${pageNumber}`, {
       headers: {
-        // Authorization: `Bearer ${localStorage.token}`,
+        Authorization: `Bearer ${localStorage.token}`,
         "Content-Type": "application/json",
         Acept: "application/json",
       },

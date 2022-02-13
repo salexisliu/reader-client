@@ -109,17 +109,8 @@ setClickedUpdate(!clickedUpdate)
             
           </CardContent>
         </CardActionArea>
-          <CardActions disableSpacing>
+        <CardActions disableSpacing>
 
-            {/* <Tooltip title="See Notes">
-          <Button size="small" color="primary">
-              <Button onClick={() => handleNotesClick(book.id)}><NoteIcon /></Button>
-          </Button>
-          </Tooltip> */}
-         
-       
-          
-       
         </CardActions>
       </Card>
       </Grid>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import Container from "@mui/material/Container";
 
@@ -7,34 +7,22 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
 import Typography from "@mui/material/Typography"
-import { Redirect, useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-function BookForm({}) {
+function BookForm() {
   const [bookText, setBookText] = useState("");
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const [formErrors, setFormErrors] = useState([]);
-  const [linesAttributes, setLinesAttributes] = useState([])
+  // const [formErrors, setFormErrors] = useState([]);
   const history = useHistory();
   const handleSubmitText = (e) => {
-    setFormErrors([]);
+    // setFormErrors([]);
     e.preventDefault();
-    console.log("TITLE", title, "AUTHOR", author)
-  
-    console.log("FULL TEXT", bookText);
-
 
     const summaryText = bookText.substring(0, 400)
-    console.log("SUMMARY", summaryText)
-
     const splitText = bookText.split(/\n/);
     const result = splitText.filter((n) => n !== "");
-
-    console.log("RESULT OF SPLIT", result);
-
     const obj = result.map(sentence => createSentenceObj(sentence))
-
-    console.log("LINES ATTRIBUTES,", obj)
 
     createBook({
       title: title,
@@ -64,19 +52,10 @@ function BookForm({}) {
       })
       .then((r) => (r.json()))
       .then((text) => {
-        console.log("fnished", text);
         history.push("/books")
-        //  setBookText(bookText.concat(text))
       });
   };
 
-     // for (let i = 0; i < result.length; i++) {
-    //     createBook({
-    //       content: result[i],
-    //       book_id: 7,
-    //       position: i,
-    //     })
-    // }
   return (
     <>
       <Container>

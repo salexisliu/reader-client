@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
-import { Redirect, Link, useHistory } from "react-router-dom";
+import { Redirect, Link} from "react-router-dom";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
@@ -18,7 +17,6 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 
 function SignUp({ setUser, bg, signup, backgroundText}) {
   const [formErrors, setFormErrors] = useState([]);
-  const history = useHistory()
   const [showPassword, setShowPassword] = useState(false)
   const [errorMessage, setErrorMessage] = useState("");
   const [username, setUsername] = useState("");

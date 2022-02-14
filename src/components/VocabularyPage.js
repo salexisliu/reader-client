@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import EnhancedTable from "./EnhancedTable";
-import Button from "@mui/material/Button";
 
 function VocabularyPage() {
   const [vocab, setVocab] = useState([]);

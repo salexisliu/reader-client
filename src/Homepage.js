@@ -4,24 +4,12 @@ import Box from "@mui/material/Box";
 
 import Typography from "@mui/material/Typography";
 
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-
 import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import TextField from "@mui/material/TextField";
 
-import { Button, CardActionArea, CardActions } from "@mui/material";
+import { Button, CardActionArea } from "@mui/material";
 import { useHistory } from "react-router-dom";
-import Tooltip from "@mui/material/Tooltip";
-
-import DeleteIcon from "@mui/icons-material/Delete";
-import NoteIcon from "@mui/icons-material/Note";
-import EditIcon from "@mui/icons-material/Edit";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 export default function Homepage({ user }) {
   const history = useHistory();
@@ -63,23 +51,21 @@ export default function Homepage({ user }) {
         if (res.ok) {
           return res.json();
         } else {
-          console.log("NOTHING");
         }
       })
       .then((data) => {
         setShowBook(data);
-        console.log("showBook", data);
+        console.log(data)
+
       });
   };
-
-  console.log("lastText", lastText);
 
   function handleClick() {
     console.log(lastText);
     history.push(`/read/${lastText}`);
   }
 
-  console.log("INIT", lastText);
+
 
   function uploadTextRoute() {
     history.push(`/upload`)

@@ -1,5 +1,4 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./Login";
 import SignUp from "./SignUp";
@@ -12,7 +11,7 @@ function UnAuthenticatedApp({ setUser, bg, loggedIn, setLoggedIn }) {
     let currentIndex = array.length, randomIndex;
 
     // While there remain elements to shuffle...
-    while (currentIndex != 0) {
+    while (currentIndex !== 0) {
 
       // Pick a remaining element...
       randomIndex = Math.floor(Math.random() * currentIndex);

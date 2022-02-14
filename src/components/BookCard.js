@@ -1,17 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { CardActionArea, CardActions } from '@mui/material';
 import { useHistory } from "react-router-dom";
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
-import NoteIcon from '@mui/icons-material/Note';
 import EditIcon from '@mui/icons-material/Edit';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
@@ -27,10 +23,6 @@ function BookCard({book, deleteBook, updateBook}) {
   }
   function handleEditClick(id) {
    console.log("ONCLICK", id);
-  }
-
-  function handleNotesClick(id) {
-    history.push(`/notes/${id}`);
   }
 
   function handleUpdateClick(e, id) {
@@ -76,12 +68,6 @@ setClickedUpdate(!clickedUpdate)
          
 
         <CardActionArea onClick={clickedAction}> 
-          {/* <CardMedia
-            component="img"
-            height="200"
-            image="https://covers.openlibrary.org/b/id/9157544-L.jpg"
-            alt="book cover"
-          /> */}
             <CardContent>
             
               <Typography gutterBottom variant="h6" component="div">
@@ -114,8 +100,7 @@ setClickedUpdate(!clickedUpdate)
         </CardActions>
       </Card>
       </Grid>
-        
-     
+
     </>
   );
 }

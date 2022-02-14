@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import AuthenticatedApp from "./AuthenticatedApp.js";
 import UnAuthenticatedApp from "./UnAuthenticatedApp.js";
 import { BrowserRouter as Router } from "react-router-dom";
-import { BookOnlineSharp } from "@mui/icons-material";
 
 export default function App() {
-  const history = useHistory();
   const [user, setUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [authChecked, setAuthChecked] = useState(false)
@@ -28,17 +25,11 @@ export default function App() {
       ;
   }, [])
 
-  function setCurrentUser(currentUser) {
-    setUser(currentUser);
-    setLoggedIn(true);
-  }
-
   function logOut() {
     setUser({});
     setLoggedIn(false);
     localStorage.token = "";
   }
-
 
   useEffect(() => {
   
@@ -94,60 +85,4 @@ export default function App() {
       </div>
     </div>
   );
-}
-
-{
-  /* <BrowserRouter>
-        {loggedIn ? (
-          <></>
-        ) : (
-          <>
-            <Link to="/login">Login</Link>
-            <span>---||||---</span>
-            <Link to="/signup">SignUp</Link>
-          </>
-        )}
-
-        <Switch>
-          <Route exact path="/">
-            <p>homepage</p>
-          </Route>
-
-          <Route exact path="/login">
-            {loggedIn ? (
-              <Redirect to="/" />
-            ) : (
-              <Login setCurrentUser={setCurrentUser} />
-            )}
-          </Route>
-
-          <Route exact path="/signup">
-            {loggedIn ? <Redirect to="/" /> : <SignUp />}
-          </Route>
-
-          <Route exact path="/auth">
-            <AuthDemo loggedIn={loggedIn} />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-  
-<Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
-    </Box>  */
 }

@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import NoteIndex from "./NoteIndex.js";
 import TextField from "@mui/material/TextField";
@@ -79,15 +78,14 @@ function StoryLines({
   };
 
   useEffect(() => {
-    
-    // console.log("lineObj", lineObj)
+
     checkIfHighlighted();
     checkNote();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function highlight() {
     setIsHighlighted((isHighlighted) => !isHighlighted);
-    // showToolbar(); //toggles toolbar
   }
 
   const handleClick = () => {
@@ -101,11 +99,6 @@ function StoryLines({
   };
 
    
-  
-
-  
-
-  // console.log("input", input);
   return (
     <>
       {toolbar ? (
@@ -114,12 +107,23 @@ function StoryLines({
            <LightModeIcon　className={"buttonCSS"}/>
           </IconButton>
           <IconButton variant="outlined" onClick={handleClickOpen} size="small">
-            <NoteAddIcon className={"buttonCSS"} />
           </IconButton>{" "}
         </>
       ) : (
         <></>
       )}
+
+      {
+      toolbar && !hasNote ? ( <>
+          <IconButton variant="outlined" onClick={handleClickOpen} size="small">
+       
+        <NoteAddIcon className={"buttonCSS"} />
+          </IconButton>{" "}
+        </>
+        ) : (
+          <></>
+        )
+    }
 
       {open ? (
         //note modal
@@ -145,7 +149,8 @@ function StoryLines({
         <></>
       )}
       <div style={{ display: "inline-flex" }}>
-        {isHighlighted ? (
+        {
+        isHighlighted ? (
        
           <Typography className="highlight" display="block" style={{ "text-indent": "2em", color: "#5d4842" }} variant="h6"  gutterBottom onMouseUp={(e) => getSelectionText(e)} key={lineObj.id}>
           
@@ -159,9 +164,11 @@ function StoryLines({
             </Typography>
         )}
   
-        {hasNote ? <Button onClick={toggleNote}><Tooltip title="See note"><StickyNote2Icon sx={{color: "gray"}} className={"buttonCSS"} /></Tooltip></Button>: <></>}
+        {
+        hasNote ? <Button onClick={toggleNote}><Tooltip title="See note"><StickyNote2Icon sx={{color: "gray"}} className={"buttonCSS"} /></Tooltip></Button>: <></>}
 
-      {showNote ? (
+      {
+      showNote ? (
         <Typography>
           {lineObj.notes.map((note) => (
             <NoteIndex handleDeleteNote={handleDeleteNote} deleteNote={deleteNote} note={note} />
@@ -171,7 +178,8 @@ function StoryLines({
         <></>
       )}
 
-      {noteChanged ? (
+      {
+      noteChanged ? (
           <Typography>
           {lineObj.notes.map((note) => (
             <NoteIndex deleteNote={deleteNote} note={note} />

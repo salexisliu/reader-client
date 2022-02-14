@@ -2,16 +2,14 @@
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { Redirect, useHistory, Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import AuthenticatedApp from "./AuthenticatedApp";
-import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
+import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from "@mui/material/IconButton";
 import FormControl from '@mui/material/FormControl';
@@ -201,66 +199,6 @@ function Login({ setUser, loggedIn, setLoggedIn, bg, loginBGText}) {
                 </Paper>
               </Grid>
             </div>
-
-
-
-          // <>
-          //   <Box
-          //     sx={{
-          //       p: 2,
-          //       m: 2,
-          //       display: "flex",
-          //       flexDirection: "column",
-          //       justifyContent: "center",
-          //       alignItems: "center",
-          //     }}
-          //   >
-          //     <h1>Log In</h1>
-          //     {/* {formErrors.length > 0
-          //         ?
-          //         <p key={formErrors} style={{ color: "red" }}>
-          //           {formErrors}
-          //         </p>
-
-          //         : null} */}
-          //     {formErrors.length > 0 ? (
-          //       <p key={formErrors} style={{ color: "red" }}>
-          //         {formErrors}
-          //       </p>
-          //     ) : null}
-          //     <form onSubmit={handleLogin}>
-          //       <TextField
-          //         helperText="Please enter username"
-          //         margin="normal"
-          //         id="outlined-basic"
-          //         label="username"
-          //         variant="outlined"
-          //         onChange={(e) => setUsername(e.target.value)}
-          //       />
-
-          //       <TextField
-          //         margin="normal"
-          //         helperText="Enter author"
-          //         id="outlined-basic"
-          //         label="password"
-          //         variant="outlined"
-          //         onChange={(e) => setPassword(e.target.value)}
-          //       />
-
-          //       <Button
-          //         variant="outlined"
-          //         size="large"
-          //         color="primary"
-          //         type="submit"
-          //       >
-          //         Submit
-          //       </Button>
-          //       <Link to="/signup">
-          //         <Button>Sign up</Button>
-          //       </Link>
-          //     </form>
-          //   </Box>
-          // </>
         )}
       </Container>
     </>

@@ -76,18 +76,17 @@ function BookContainer(loggedIn) {
         return -1;
        
       }
-      if (titleA > titleB) {
+      else if (titleA > titleB) {
         return 1;
      
       }
-    
+    return titleA
     })
     setBooks([...newBooks])
   
   }
 
   const sortByAuthor = () => {
-    console.log(books)
 
     const newBooks = books.sort(function (a, b) {
       let textA = a.author.toUpperCase(); // ignore upper and lowercase
@@ -96,11 +95,11 @@ function BookContainer(loggedIn) {
         return -1;
 
       }
-      if (textA > textB) {
+      else if (textA > textB) {
         return 1;
 
       }
-
+      return textA
     })
     setBooks([...newBooks])
 
@@ -157,7 +156,9 @@ function BookContainer(loggedIn) {
           alignItems="flex-start"
         >
           {books
+            // eslint-disable-next-line array-callback-return
             .filter((book) => {
+              // eslint-disable-next-line eqeqeq
               if (searchQuery == "") {
                 return book;
               } else if (
@@ -166,7 +167,8 @@ function BookContainer(loggedIn) {
               ) {
                 return book;
               }
-        
+      
+              
             })
             .map
             ((book) => (

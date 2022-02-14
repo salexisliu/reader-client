@@ -1,25 +1,18 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import StoryLines from "./StoryLines.js";
 import Button from "@mui/material/Button";
 import Dictionary from "./Dictionary.js";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import EditOffIcon from '@mui/icons-material/EditOff';
-//icons
+
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import SpellcheckIcon from '@mui/icons-material/Spellcheck';
-import Tooltip from '@mui/material/Tooltip';
-function StoryContainer({ bookId, user }) {
-  // console.log("USEPARAMS", bookId);
 
+function StoryContainer({ bookId, user }) {
   const [toolbar, setToolbar] = useState(false);
-  // const [book, setBook] = useState({ lines: {} });
-  //   const history = useHistory();
 
   //dicitonary
   const [dictionary, setDictionary] = useState(false);
@@ -35,15 +28,9 @@ function StoryContainer({ bookId, user }) {
   const [hasMore, setHasMore] = useState(false);
   const [loading, setLoading] = useState(true);
   const observer = useRef();
-
   const [seeNoteButton, setSeeNoteButton] = useState(false);
-
-  //id  of lines
-  // console.log("OBSERVER", observer);
-
-  //onMouseUp e
-
   const [lookUp, setLookUp] = useState("");
+
   const addLookUp = (word) => {
     setLookUp(word);
   };
@@ -90,19 +77,6 @@ function StoryContainer({ bookId, user }) {
       });
   };
 
-  // const fetchUpdatedLines = () => {
-  //   fetch(`http://localhost:3000/linebybook/${bookId}?page=${1}`, {
-  //     headers: {
-  //       // Authorization: `Bearer ${localStorage.token}`,
-  //       "Content-Type": "application/json",
-  //       Acept: "application/json",
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setLines(data);
-  //     });
-  // };
 
   const highlightLine = (formData) => {
     console.log("formData", formData);
@@ -132,7 +106,7 @@ function StoryContainer({ bookId, user }) {
   };
 
   const deleteNote = (id) => {
-    setSeeNoteButton(!seeNoteButton)
+    // setSeeNoteButton(!seeNoteButton)
 
     fetch(`http://localhost:4000/notes/${id}`, {
       method: "DELETE",
@@ -146,19 +120,14 @@ function StoryContainer({ bookId, user }) {
         if (res.ok) {
           return res.json();
         } else {
-          //  return res.json().then((err) => setFormErrors(err));
           return res.json().then((errors) => Promise.reject(errors));
         }
       })
       .then((line) => {
         insertLine(line[0]); //return  whole line
-        setNoteChanged(!noteChanged);
+        // setNoteChanged(!noteChanged);
       });
   };
-
-  // const updatedNotes = lines.filter((line) => line.note.id !== id);
-  // setNotes(updatedNotes);
-  // setNoteChanged(true);
 
   const addNote = (formData) => {
     console.log("ADD NOTE", formData);
@@ -207,20 +176,14 @@ function StoryContainer({ bookId, user }) {
     text = window.getSelection().toString();
     const newText = text;
 
-    // } else if (document.selection && document.selection.type != "Control") {
-    //   text = document.selection.createRange().text
-    // }
     const punctuation = [",", ".", "?", ";", "/", " ", "—", "_"];
 
     if (newText.trim() === "" || punctuation.includes(newText.trim())) {
       setDictionary(false);
-      console.log("FALSE", newText);
     } else {
       addLookUp(newText);
       setDictionary(true);
-      console.log("TRUE", newText);
     }
-    //shows  dictioanry
   }
 
   function closeDictionary() {
@@ -231,6 +194,7 @@ function StoryContainer({ bookId, user }) {
     localStorage.setItem("bookId", JSON.stringify(bookId))
     setLoading(true);
     fetchLines();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageNumber]);
 
 
@@ -239,7 +203,6 @@ function StoryContainer({ bookId, user }) {
   };
 
   useEffect(() => {
-    console.log("STORYCONTAINER STRING", lookUp);
   }, []);
   return (
     <>
@@ -313,8 +276,8 @@ function StoryContainer({ bookId, user }) {
                         deleteNote={deleteNote}
                         addLookUp={addLookUp}
                         getSelectionText={getSelectionText}
-                          seeNoteButton={seeNoteButton}
-                          setSeeNoteButton={setSeeNoteButton}
+                        seeNoteButton={seeNoteButton}
+                        setSeeNoteButton={setSeeNoteButton}
                       />
                     </div>
                   )}
@@ -356,9 +319,9 @@ function StoryContainer({ bookId, user }) {
                     deleteNote={deleteNote}
                     addLookUp={addLookUp}
                     getSelectionText={getSelectionText}
-                      seeNoteButton={seeNoteButton}
-                      setSeeNoteButton={setSeeNoteButton}
-                  />
+                    seeNoteButton={seeNoteButton}
+                    setSeeNoteButton={setSeeNoteButton}
+                />
                 </div>
               );
             }
@@ -371,28 +334,3 @@ function StoryContainer({ bookId, user }) {
 }
 
 export default StoryContainer;
-
-// const insertBack = (line) => {
-
-//   const index = lines.findIndex(line => line.id === lines.id)
-//     const newLines = [...lines.slice(0, index), line, ...lines.slice(index + 1)]
-//     setLines(newLines)
-
-//   }
-
-// useEffect(() => {
-//   setError(false);
-//   fetchBook();
-// }, [notes]);
-
-// const fetchBook = () => {
-//   fetch(`/books/${bookId}`, {
-//     headers: {
-//       Authorization: `Bearer ${localStorage.token}`,
-//       "Content-Type": "application/json",
-//       Accept: "application/json",
-//     },
-//   })
-//     .then((res) => res.json())
-//     .then((data) => setBook(data));
-// };

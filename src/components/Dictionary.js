@@ -1,16 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Card from "@mui/material/Card";
 
 function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, bookId }) {
 
   const [definition, setDefinition] = useState("");
   const [term, setTerm] = useState("");
-  const [word, setWord] = useState("");
+  // const [word, setWord] = useState("");
 
   const speak = (word) => {
     let utterance = new SpeechSynthesisUtterance(word);
@@ -29,7 +28,7 @@ function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, boo
       result = result[0];
       console.log("fetch first word", result);
       fetchDef(result);
-      setWord(result.toLowerCase());
+      // setWord(result.toLowerCase());
       soundOn ? speak(result) : console.log(result);
     } else {
       console.log("CLICKWORD TO STRING", clickedWord);
@@ -41,40 +40,12 @@ function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, boo
   }, [lookUp]);
 
   var synth = window.speechSynthesis;
-  const clickSpeak = (word) => {
-    let utterance = new SpeechSynthesisUtterance(word);
-    synth.speak(utterance);
-    console.log("UTTER", utterance);
-  };
 
   const handleSpeakClick = () => {
     speak(definition);
   };
   const handleSpeakCancel = () => {
     synth.cancel();
-  };
-
-  const handleDefine = (e) => {
-   
-    setDefinition("");
-    console.log("clicked", e.target.textContent);
-    const clickedWord = e.target.textContent.toLowerCase();
-    console.log("clicked word", clickedWord);
-
-    const punctuation = [",", ".", "?", ";", "/", "—"];
-
-    [...clickedWord].map((letter) => {
-      if (punctuation.includes(letter)) {
-        console.log(letter);
-        const newWord = clickedWord.replace(letter, "");
-        console.log("REPLACE", newWord);
-        fetchDef(newWord.toLowerCase());
-        speak(newWord);
-      } else {
-        console.log("fine");
-      }
-    });
-    speak(clickedWord);
   };
 
   const fetchDef = (word) => {
@@ -85,10 +56,7 @@ function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, boo
       .then((res) => {
         if (res.ok) { 
           res.json().then((data) => {
-        console.log("DIC DEF", data[0]);
-        // setDefinition(data);
-
-      
+ 
         if (typeof data[0] === 'string') {
               setDefinition("Definition not found!")
         } else if (data[0] === undefined) {
@@ -102,7 +70,7 @@ function Dictionary({ lookUp, defineOn, setLookUp, closeDictionary, soundOn, boo
             if (typeof data[0] !== 'string' && data[0]) {
           createFlashcard(word, data[0].shortdef[0]);
         } else {
-          console.log("FC NOT MADE, no word", word);
+      
         }
       })
     }
